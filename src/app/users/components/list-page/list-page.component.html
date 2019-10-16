@@ -1,0 +1,218 @@
+<app-breadcrumb [breadcrumbList]="[{name:'Users', url:'users/dashboard'},{name: 'List', url:''}]"></app-breadcrumb>
+<div class="g-pa-20">
+  <div class="g-brd-around g-brd-gray-light-v7 g-rounded-4 g-pa-15 g-pa-20--md">
+    <form #f="ngForm" (ngSubmit)="submitFilter(f.value)">
+        <h3 class="d-flex align-self-center text-uppercase g-font-size-12 g-font-size-default--md g-color-black">
+          <span class="d-flex align-self-center g-pos-rel g-font-size-18 g-mr-10"><i class="hs-admin-filter"></i></span>
+          Filter</h3>
+        <hr class="d-flex g-brd-gray-light-v7 g-my-15 g-mt-15--md g-mb-30--md">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="g-mb-10" for="email">Email</label>
+              <div class="g-pos-rel">
+                <span class="g-pos-abs g-top-0 g-right-0 d-block g-width-40 h-100 opacity-0 g-opacity-1--success">
+                  <i class="hs-admin-check g-absolute-centered g-font-size-default g-color-secondary"></i>
+                </span>
+                <input
+                  id="email"
+                  ngModel
+                  tabindex="1"
+                  name="email"
+                  #email="ngModel"
+                  placeholder="Email"
+                  autocomplete="off"
+                  type="email"
+                  class="form-control form-control-md g-brd-gray-light-v7 g-brd-gray-light-v3--focus g-rounded-4 g-px-14 g-py-10">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="g-mb-10" for="phoneNumber">Phone Number</label>
+              <div class="g-pos-rel">
+                <span class="g-pos-abs g-top-0 g-right-0 d-block g-width-40 h-100 opacity-0 g-opacity-1--success">
+                  <i class="hs-admin-check g-absolute-centered g-font-size-default g-color-secondary"></i>
+                </span>
+                <input
+                  id="phoneNumber"
+                  ngModel
+                  placeholder="Phone Number"
+                  tabindex="2"
+                  name="phoneNumber"
+                  autocomplete="off"
+                  #email="ngModel"
+                  type="text"
+                  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                  class="form-control form-control-md g-brd-gray-light-v7 g-brd-gray-light-v3--focus g-rounded-4 g-px-14 g-py-10">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <!-- Select with Text -->
+            <div class="g-mb-30">
+              <label class="g-mb-10">Select Status</label>
+              <ng-select
+                [items]="statuses"
+                [(ngModel)]="selectedStatuses"
+                tabindex="3"
+                name="active"
+                placeholder="Select Status"
+                [searchable]="false"
+                [clearable]="false"
+                bindLabel="name"
+                bindValue="value"
+                class="u-select-dropdown--blue-theme u-sibling w-100">
+                <ng-template ng-label-tmp let-item="item">
+                      <span class="d-flex align-items-center w-100">
+                          <span
+                              *ngFor="let color of item.colors"
+                              class="{{color}} u-badge-v2--md g-pos-stc g-transform-origin--top-left g-mr-8"></span>
+                          <span> {{item.name}}</span>
+                      </span>
+                </ng-template>
+                <ng-template ng-option-tmp let-item="item" let-index="index">
+                      <span class="d-flex align-items-center w-100">
+                          <span
+                            *ngFor="let color of item.colors"
+                            class="{{color}} u-badge-v2--md g-pos-stc g-transform-origin--top-left g-mr-8"></span>
+                          <span> {{item.name}}</span>
+                      </span>
+                </ng-template>
+              </ng-select>
+            </div>
+            <!-- End Select with Text -->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="g-mb-10" for="senders">Senders</label>
+              <div class="g-pos-rel">
+                <span class="g-pos-abs g-top-0 g-right-0 d-block g-width-40 h-100 opacity-0 g-opacity-1--success">
+                  <i class="hs-admin-check g-absolute-centered g-font-size-default g-color-secondary"></i>
+                </span>
+                <input
+                  id="senders"
+                  ngModel
+                  placeholder="Senders"
+                  tabindex="4"
+                  name="senders"
+                  #senders="ngModel"
+                  type="text"
+                  autocomplete="off"
+                  class="form-control form-control-md g-brd-gray-light-v7 g-brd-gray-light-v3--focus g-rounded-4 g-px-14 g-py-10">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <label>Created On From: </label>
+            <div class="u-datepicker-right u-datepicker--v3 g-pos-rel w-100 g-cursor-pointer g-brd-around g-brd-gray-light-v7 g-rounded-4">
+              <input
+                flatpickr
+                id="createdOn_from"
+                ngModel
+                name="createdOn_from"
+                #createdOn_from="ngModel"
+                type="text"
+                [dateFormat]="'Y-m-d'"
+                [allowInput]="true"
+                placeholder="Created On From"
+                mask="0000-00-00"
+                [dropSpecialCharacters]="false"
+                autocomplete="off"
+                class="js-range-datepicker-from w-100 g-bg-transparent g-font-size-12 g-font-size-default--md g-color-gray-dark-v6 g-pr-80 g-pl-15 g-py-9">
+              <div class="d-flex align-items-center g-absolute-centered--y g-right-0 g-color-gray-light-v6 g-color-lightblue-v9--sibling-opened g-mr-15">
+                <i class="hs-admin-calendar g-font-size-18 g-mr-10"></i>
+                <i class="hs-admin-angle-down"></i>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <label>Created On To: </label>
+            <div class="u-datepicker-right u-datepicker--v3 g-pos-rel w-100 g-cursor-pointer g-brd-around g-brd-gray-light-v7 g-rounded-4">
+              <input
+                flatpickr
+                id="createdOn_to"
+                ngModel
+                name="createdOn_to"
+                #createdOn_to="ngModel"
+                type="text"
+                [dateFormat]="'Y-m-d'"
+                [allowInput]="true"
+                placeholder="Created On To"
+                mask="0000-00-00"
+                [dropSpecialCharacters]="false"
+                autocomplete="off"
+                class="js-range-datepicker-from w-100 g-bg-transparent g-font-size-12 g-font-size-default--md g-color-gray-dark-v6 g-pr-80 g-pl-15 g-py-9">
+
+                <div class="d-flex align-items-center g-absolute-centered--y g-right-0 g-color-gray-light-v6 g-color-lightblue-v9--sibling-opened g-mr-15">
+                  <i class="hs-admin-calendar g-font-size-18 g-mr-10"></i>
+                  <i class="hs-admin-angle-down"></i>
+                </div>
+            </div>
+          </div>
+        </div>
+        <app-filter-form-tail (onReset)="resetFilterForm(f)"></app-filter-form-tail>
+    </form>
+  </div>
+</div>
+<div class="g-pa-20">
+    <div class="g-mb-40">
+        <div id="scroll-to-here"></div>
+        <div class="table-responsive">
+            <table [style.display]="displayTable"class="table u-table--v3--bordered g-color-black">
+                <thead>
+                    <tr>
+                        <th class="g-bg-gray-light-v8 g-font-weight-400 g-valign-middle g-brd-bottom-none g-py-15">
+                            <div class="d-flex align-items-center justify-content-between">Email</div>
+                        </th>
+                        <th class="g-bg-gray-light-v8 g-font-weight-400 g-valign-middle g-brd-bottom-none g-py-15">
+                            <div class="d-flex align-items-center justify-content-between">Status</div>
+                        </th>
+                        <th class="g-bg-gray-light-v8 g-font-weight-400 g-valign-middle g-brd-bottom-none g-py-15">
+                            <div class="d-flex align-items-center justify-content-between">Phone</div>
+                        </th>
+                        <th class="g-bg-gray-light-v8 g-font-weight-400 g-valign-middle g-brd-bottom-none g-py-15">
+                          <div class="d-flex align-items-center justify-content-between">Created On</div>
+                        </th>
+                        <th class="g-bg-gray-light-v8 g-font-weight-400 g-valign-middle g-brd-bottom-none g-py-15">
+                            <div class="d-flex align-items-center justify-content-between">Actions</div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngIf="notFound"><td colspan="5" class="g-hidden-sm-down g-valign-middle g-brd-top-none g-brd-bottom g-brd-gray-light-v7 g-py-15 g-py-30--md g-px-5 g-px-10--sm">No matching records found</td></tr>
+                    <tr *ngFor="let user of users; let i = index">
+                        <td class="g-hidden-sm-down g-valign-middle g-brd-top-none g-brd-bottom g-brd-gray-light-v7 g-py-15 g-py-30--md g-px-5 g-px-10--sm">{{user.email}}</td>
+                        <td class="g-hidden-sm-down g-valign-middle g-brd-top-none g-brd-bottom g-brd-gray-light-v7 g-py-15 g-py-30--md g-px-5 g-px-10--sm">
+                            <span *ngIf="!user.active" class="d-flex align-items-center justify-content-center u-tags-v1  g-font-size-default g-color-gray-dark-v6 g-brd-white g-py-4 g-px-15">
+                                <span class="u-badge-v2--md g-pos-stc g-transform-origin--top-left g-brd-teal-v2  g-mr-8"></span>
+                                Inactive
+                            </span>
+                            <span *ngIf="user.active" class="d-flex align-items-center justify-content-center u-tags-v1  g-font-size-default g-color-gray-dark-v6 g-brd-white g-py-4 g-px-15">
+                                <span class="u-badge-v2--md g-pos-stc g-transform-origin--top-left g-bg-teal-v2 g-mr-8"></span>
+                                Active
+                            </span>
+                        </td>
+                        <td class="g-hidden-sm-down g-valign-middle g-brd-top-none g-brd-bottom g-brd-gray-light-v7 g-py-15 g-py-30--md g-px-5 g-px-10--sm">{{user.phoneNumber}}</td>
+                        <td class="g-hidden-sm-down g-valign-middle g-brd-top-none g-brd-bottom g-brd-gray-light-v7 g-py-15 g-py-30--md g-px-5 g-px-10--sm">{{user.createdOn | date: 'dd MMMM, yyyy - hh:mm:ss a'}}</td>
+                        <td class="g-hidden-sm-down g-valign-middle g-brd-top-none g-brd-bottom g-brd-gray-light-v7 g-py-15 g-py-30--md g-px-5 g-px-10--sm"><app-user-dots-actions [_id]="user._id"></app-user-dots-actions></td>
+                    </tr>
+                    <tr *ngIf="pageNumbers>0">
+                        <td colspan="5">
+                            <app-page-size
+                            (changeSize)="onSizeChange($event)"
+                            (changePage)="onPageChange($event)"
+                            [totalCount]="totalCount"
+                            [pagination]="pagination"
+                            [pageNumbers]="pageNumbers"
+                            [currentPaginationSelected]="currentPageSelected"
+                            [selectedPage]="selectedPage">
+                            </app-page-size>
+                        </td>
+                    </tr>
+              </tbody>
+          </table>
+        </div>
+    </div>
+    <app-main-loader [style.display]="displayLoader"></app-main-loader>
+</div>

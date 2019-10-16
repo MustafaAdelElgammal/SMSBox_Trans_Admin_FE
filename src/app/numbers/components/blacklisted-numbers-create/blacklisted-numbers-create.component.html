@@ -1,0 +1,68 @@
+<app-breadcrumb [breadcrumbList]="[{name:'Numbers', url:'notifications/dashboard'}, {name:'Create BlackListed Numbers', url:''}]"></app-breadcrumb>
+
+<div class="g-pa-20">
+        <div class="g-brd-around g-brd-gray-light-v7 g-rounded-4 g-pa-15 g-pa-20--md g-mb-30">
+          <form [formGroup]="createBlacklistForm" (ngSubmit)="onSubmit()">
+            <h3 class="d-flex align-self-center text-uppercase g-font-size-12 g-font-size-default--md g-color-black"><span class="d-flex align-self-center g-pos-rel g-font-size-18 g-mr-10"><i class="hs-admin-panel"></i></span>Create New BlacklistedFourm</h3>
+            <hr class="d-flex g-brd-gray-light-v7 g-my-15 g-mt-15--md g-mb-30--md">
+
+            <div class="row">
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="g-mb-10" for="number">Number <span style="color: red">*</span></label>
+                  <div class="g-pos-rel">
+                    <input
+                      id="number"
+                      formControlName="number"
+                      type="text"
+                      tabindex="1"
+                      placeholder="Number"
+                      oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(.*)/g, '$1');"
+                      autocomplete="off"
+                      [class.u-has-error-v3]="!createBlacklistForm.get('number').valid && createBlacklistForm.get('number').touched || errorMessage != '' && !createBlacklistForm.get('number').valid || numberUniqueError"
+                      class="form-control form-control-md g-brd-gray-light-v7 g-brd-gray-light-v3--focus g-rounded-4 g-px-14 g-py-10">
+                    <small
+                      *ngIf="!createBlacklistForm.get('number').valid && createBlacklistForm.get('number').touched || errorMessage != '' && !createBlacklistForm.get('number').valid || numberUniqueError != null" class="g-font-weight-300 g-font-size-12 g-color-lightred-v3  g-pt-5">
+                      <span *ngIf="!createBlacklistForm.get('number').valid && createBlacklistForm.get('number').errors['required']">Number is required</span>
+                      <span *ngIf="numberUniqueError != null">{{numberUniqueError}}</span>
+                    </small>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="g-mb-10" for="details">Details <span style="color: red">*</span></label>
+                  <div class="g-pos-rel">
+                    <input
+                      id="details"
+                      maxlength=1000
+                      formControlName="details"
+                      type="text"
+                      tabindex="2"
+                      placeholder="details"
+                      autocomplete="off"
+                      [class.u-has-error-v3]="!createBlacklistForm.get('details').valid && (createBlacklistForm.get('details').touched || errorMessage != '')"
+                      class="form-control form-control-md g-brd-gray-light-v7 g-brd-gray-light-v3--focus g-rounded-4 g-px-14 g-py-10">
+                    <small
+                      *ngIf="!createBlacklistForm.get('details').valid && createBlacklistForm.get('details').touched || errorMessage != '' && !createBlacklistForm.get('details').valid" class="g-font-weight-300 g-font-size-12 g-color-lightred-v3  g-pt-5">
+                      <span *ngIf="createBlacklistForm.get('details').errors['required']">Details is required</span>
+                      <span *ngIf="!createBlacklistForm.get('details').valid && createBlacklistForm.get('details').errors['maxlength']">Details maxmumim length is 1000</span>
+                    </small>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+                <button
+                  [disabled]="isSubmitClick"
+                  class="btn btn-md btn-xl--md u-btn-secondary g-width-160--md g-font-size-12 g-font-size-default--md g-mr-10">
+                  <span>Create </span>
+                  <img *ngIf="isSubmitClick" src="assets/img/preloaders/preloader-white.svg" style="height: 16px;">
+                </button>
+
+          </form>
+        </div>
+      </div>

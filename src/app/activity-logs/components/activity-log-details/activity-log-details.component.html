@@ -1,0 +1,47 @@
+<app-breadcrumb [breadcrumbList]="[{name:'Activity Log List', url:'activity_logs'},{name:'Activity Log Details', url:''}]"></app-breadcrumb>
+
+<div class="g-pa-20" *ngIf="currentActivityLog">
+              <b>
+                  <span class="g-color-gray-dark-v6 g-color-primary--parent-hover g-color-primary--parent-active">Activity Log Details</span>
+              </b>
+
+              <div class="g-pos-rel h-100 g-brd-around g-brd-gray-light-v7 g-rounded-4 g-pa-15 g-pa-30--md" style="border-top: 0 !important;">
+                  <div class="row row">
+
+                    <div class="col-md-6">
+                      <div class="media-body-md align-self-center g-mb-20 g-mb-0--md">
+                          <h3 class="g-line-height-1_5 g-font-weight-400 g-font-size-16 g-color-black g-mb-5">Email:</h3>
+                          <p class="d-block g-font-weight-300 g-color-gray-dark-v6 mb-0">{{currentActivityLog.email}}</p>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="media-body-md align-self-center g-mb-20 g-mb-0--md">
+                          <h3 class="g-line-height-1_5 g-font-weight-400 g-font-size-16 g-color-black g-mb-5">Activity:</h3>
+                          <p class="d-block g-font-weight-300 g-color-gray-dark-v6 mb-0">{{currentActivityLog.activity}}</p>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <div class="row row g-mt-25">
+
+                          <div class="col-md-6">
+                          <div class="media-body-md align-self-center g-mb-20 g-mb-0--md">
+                                <h3 class="g-line-height-1_5 g-font-weight-400 g-font-size-16 g-color-black g-mb-5">Created On</h3>
+                                <strong class="d-block g-line-height-1 g-font-weight-400 g-font-size-16 g-color-darkblue-v9 g-mb-5">{{currentActivityLog.createdOn | date: 'dd MMMM, yyyy'}}</strong>
+                                <strong class="d-block g-line-height-1 g-font-size-16 g-mb-5">{{currentActivityLog.createdOn | date: 'hh:mm:ss a'}}</strong>
+                            </div>
+                          </div>
+
+                          <div class="col-md-6">
+                            <div class="media-body-md align-self-center g-mb-20 g-mb-0--md">
+                                <h3 class="g-line-height-1_5 g-font-weight-400 g-font-size-16 g-color-black g-mb-5">Details:</h3>
+                                <p class="d-block g-font-weight-300 g-color-gray-dark-v6 mb-0">{{currentActivityLog.details}}</p>
+                            </div>
+                          </div>
+
+                  </div>
+
+               </div>
+</div>

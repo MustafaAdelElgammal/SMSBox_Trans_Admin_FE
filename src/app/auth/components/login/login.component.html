@@ -1,0 +1,118 @@
+<!-- Login -->
+<section class="g-min-height-100vh g-flex-centered g-bg-lightblue-radialgradient-circle">
+  <div class="container g-py-100">
+    <div class="row justify-content-center">
+      <div class="col-sm-8 col-lg-5">
+        <div class="u-shadow-v24 g-bg-white rounded g-py-40 g-px-30">
+          <header class="text-center mb-4">
+            <h2 class="h2 g-color-black g-font-weight-600">Profile Login</h2>
+          </header>
+          <div *ngIf="errorMessage != null" class="noty_bar noty_type__error noty_theme__unify--v1 noty_close_with_click noty_has_progressbar noty_has_timeout">
+            <div class="noty_body">
+              <div class="g-mr-20">
+                <div class="noty_body__icon">
+                  <i class="hs-admin-alert"></i>
+                </div>
+              </div>
+              <div>{{errorMessage}}</div>
+            </div>
+            <div class="noty_progressbar"></div>
+          </div>
+          <!-- Form -->
+            <form
+              autocomplete="off"
+              #f="ngForm"
+              (ngSubmit)="signIn(f.value)"
+              class="g-py-15">
+            <div
+              [class.u-has-error-v3]="!email.valid && email.touched"
+              class="form-group  g-mb-30">
+              <div class="">
+                <label for="email" class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">Email:</label>
+              </div>
+              <div class="g-pos-rel">
+                <input
+                  id="email"
+                  ngModel
+                  placeholder="example@domain.com"
+                  tabindex="1"
+                  name="email"
+                  #email="ngModel"
+                  type="email"
+                  required
+                  pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+                  class="form-control form-control-md g-brd-gray-light-v7 g-brd-gray-light-v3--focus g-brd-pink-v2--error g-rounded-4 g-px-14 g-py-10">
+                <small
+                  *ngIf="!email.valid && email.touched"
+                  class="g-font-weight-300 g-font-size-12 g-color-lightred-v3  g-pt-5">
+                    <span *ngIf="email.errors.required">Email is required</span>
+                    <span *ngIf="email.errors.pattern">Email is not a valid</span>
+                </small>
+              </div>
+            </div>
+              <div
+                [class.u-has-error-v3]="!password.valid && password.touched"
+                class="form-group  g-mb-30">
+                <div class="row justify-content-between">
+                  <div class="col align-self-center">
+                    <label for="password" class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">Password:</label>
+                  </div>
+                  <div class="col align-self-center text-right">
+                    <a class="d-inline-block g-font-size-12 mb-2" href="javascript:void(0)">Forgot password?</a>
+                  </div>
+                </div>
+                <div class="g-pos-rel">
+                  <input
+                    type="password"
+                    autocomplete="false"
+                    ngModel
+                    name="password"
+                    id="password"
+                    placeholder="Password"
+                    #password="ngModel"
+                    tabindex="2"
+                    required
+                    class="form-control form-control-md g-brd-gray-light-v7 g-brd-gray-light-v3--focus g-brd-pink-v2--error g-rounded-4 g-px-14 g-py-10">
+                  <small
+                    *ngIf="!password.valid && password.touched"
+                    class="g-font-weight-300 g-font-size-12 g-color-lightred-v3  g-pt-5">
+                    <span *ngIf="password.errors.required">Password is required</span>
+                  </small>
+                </div>
+              </div>
+            <div class="g-mb-35">
+              <div class="row justify-content-between">
+                <div class="col-8 align-self-center">
+                  <label class="form-check-inline u-check g-color-gray-dark-v5 g-font-size-12 g-pl-25 mb-0">
+                    <input
+                      ngModel
+                      id="remember"
+                      tabindex="3"
+                      name="remember"
+                      type="checkbox"
+                      class="g-hidden-xs-up g-pos-abs g-top-0 g-left-0"
+                    >
+                    <div class="u-check-icon-checkbox-v6 g-absolute-centered--y g-left-0">
+                      <i class="fa" data-check-icon="&#xf00c;"></i>
+                    </div>
+                    <span class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">Remember Me</span>
+                  </label>
+                </div>
+                <div class="col-4 align-self-center text-right">
+                  <button
+                    [disabled]="!f.valid || isLoginClick"
+                    class="btn btn-md u-btn-primary rounded g-py-13 g-px-25">
+                    <span>Login </span>
+                    <img *ngIf="isLoginClick" src="assets/img/preloaders/preloader-white.svg" style="height: 16px;">
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+          <footer class="text-center"></footer>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End Login -->

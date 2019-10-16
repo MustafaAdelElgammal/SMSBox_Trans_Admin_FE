@@ -1,0 +1,31 @@
+<div class="modal-header">
+    <h4 class="modal-title">{{ options.title}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="no()"><span aria-hidden="true">&times;</span></button>
+</div>
+<div class="modal-body" [hidden]="!withDetails">
+    <div class="form-group">
+        <label for="details">Details</label>
+        <textarea
+            #details="ngModel"
+            class="form-control"
+            rows="4"
+            cols="3"
+            name="details"
+            id="details"
+            title="details"
+            required
+            ngModel
+            tabindex="1"
+            [class.u-has-error-v3]="!details.valid && details.touched">
+        </textarea>
+        <small *ngIf="!details.valid && details.touched" class="g-font-weight-300 g-font-size-12 g-color-lightred-v3  g-pt-5">
+            <span>Details is required</span>
+        </small>
+    </div>
+</div>
+<div class="modal-footer">
+    <p style=" display: block; width: 100%; margin: 6px 0; font-weight: bold; ">{{ options.message }}</p>
+    <button  [hidden]="!withDetails" [disabled]="!details.valid" type="button" class="btn btn-danger" (click)="yes(details.value)">Yes</button>
+    <button  [hidden]="withDetails" type="button" class="btn btn-danger" (click)="yes(details.value)">Yes</button>
+    <button type="button" class="btn btn-secondary" (click)="no()">No</button>
+</div>

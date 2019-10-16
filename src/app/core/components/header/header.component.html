@@ -1,0 +1,23 @@
+<header id="js-header" class="u-header u-header--sticky-top">
+    <div class="u-header__section u-header__section--admin-dark g-min-height-65">
+        <nav class="navbar no-gutters g-pa-0">
+            <div class="col-auto d-flex flex-nowrap u-header-logo-toggler g-py-12">
+                <!-- Logo -->
+                <a routerLink="/admin/dashboard" class="navbar-brand d-flex align-self-center g-hidden-xs-down g-line-height-1 py-0" style="color: #fff">SMSBOX ADMIN</a>
+                <!-- Sidebar Toggle -->
+                <a id="js-side-nav" class="js-side-nav u-header__nav-toggler d-flex align-self-center ml-auto" href="javascript:void(0)" data-hssm-class="u-side-nav--mini u-sidebar-navigation-v1--mini" data-hssm-body-class="u-side-nav-mini" data-hssm-is-close-all-except-this="true" data-hssm-target="#sideNav"><i class="hs-admin-align-left"></i></a>
+            </div>
+            <div class="col-auto d-flex g-py-12 g-pl-40--lg ml-auto">
+                <div class="g-pos-rel g-hidden-sm-down g-mr-5">
+                    <app-top-messages></app-top-messages>
+                </div>
+                <!--<div class="g-pos-rel g-hidden-sm-down">-->
+                    <!--<app-top-notifications></app-top-notifications>-->
+                <!--</div>-->
+                <div class="col-auto d-flex g-pt-5 g-pt-0--sm g-pl-10 g-pl-10--sm">
+                    <app-top-user></app-top-user>
+                </div>
+            </div>
+        </nav>
+    </div>
+</header>

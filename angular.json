@@ -1,0 +1,196 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "smsBoxAdminFrontend": {
+      "root": "",
+      "sourceRoot": "src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/smsBoxAdminFrontend",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "src/tsconfig.app.json",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css",
+              "node_modules/noty/lib/noty.css",
+              "node_modules/ngx-toastr/toastr.css",
+//              "node_modules/multiselect/css/multi-select.css",
+              "node_modules/bootstrap-select/dist/css/bootstrap-select.min.css",
+              "src/assets/css/animate.css",
+              "src/assets/css/hamburgers.min.css",
+              "node_modules/flatpickr/dist/flatpickr.min.css",
+//              "src/assets/css/summernote-themes/unify-lite.css",
+              "node_modules/@ng-select/ng-select/themes/default.theme.css",
+              "src/styles.css"
+            ],
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/jquery-migrate/dist/jquery-migrate.min.js",
+              "node_modules/jquery.cookie/jquery.cookie.js",
+              "node_modules/popper.js/dist/umd/popper.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "node_modules/jquery-ui/ui/widget.js",
+              "node_modules/jquery-ui/ui/version.js",
+              "node_modules/jquery-ui/ui/keycode.js",
+              "node_modules/jquery-ui/ui/position.js",
+              "node_modules/jquery-ui/ui/unique-id.js",
+              "node_modules/jquery-ui/ui/safe-active-element.js",
+              "node_modules/jquery-ui/ui/widgets/menu.js",
+              "node_modules/jquery-ui/ui/widgets/mouse.js",
+              "node_modules/jquery-ui/ui/widgets/slider.js",
+              "src/assets/scripts/appear.js",
+              "src/assets/scripts/bloodhound.min.js",
+              "node_modules/jquery-mousewheel/jquery.mousewheel.js",
+              "node_modules/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.js",
+              "node_modules/bootstrap-select/dist/js/bootstrap-select.min.js",
+//              "node_modules/jquery-typeahead/dist/jquery.typeahead.min.js",
+//              "node_modules/bootstrap-tagsinput/dist/bootstrap-tagsinput.js",
+//              "node_modules/multiselect/js/jquery.multi-select.js",
+//              "node_modules/jquery.fancybox/source/jquery.fancybox.js",
+//              "node_modules/datatables.net/js/jquery.dataTables.js",
+//              "node_modules/datatables.net-select/js/dataTables.select.min.js",
+//              "node_modules/table-edits/build/table-edits.min.js",
+//              "node_modules/flatpickr/dist/flatpickr.min.js",
+//              "node_modules/ion-rangeslider/js/ion.rangeSlider.min.js",
+//              "node_modules/jquery-filer/js/jquery.filer.min.js",
+//              "node_modules/noty/lib/noty.min.js",
+//              "node_modules/summernote/dist/summernote-bs4.min.js",
+
+
+              "src/assets/scripts/hs.core.js",
+              "src/assets/scripts/hs.side-nav.js",
+              "src/assets/scripts/hs.hamburgers.js",
+              "src/assets/scripts/hs.dropdown.js",
+              "src/assets/scripts/hs.scrollbar.js"
+//              "src/assets/scripts/hs.focus-state.js",
+//              "src/assets/scripts/hs.datatables.js",
+//              "src/assets/scripts/hs.multi-select.js",
+//              "src/assets/scripts/hs.file-attachments.js",
+//              "src/assets/scripts/hs.file-attachement.js",
+//              "src/assets/scripts/hs.range-datepicker.js",
+//              "src/assets/scripts/hs.count-qty.js",
+//              "src/assets/scripts/hs.slider.js",
+//              "src/assets/scripts/hs.rating.js"
+
+            ]
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": false,
+              "vendorChunk": true,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "4mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "smsBoxAdminFrontend:build",
+            "port": 2030
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "smsBoxAdminFrontend:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "smsBoxAdminFrontend:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "src/test.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "src/tsconfig.spec.json",
+            "karmaConfig": "src/karma.conf.js",
+            "styles": [
+              "src/styles.css"
+            ],
+            "scripts": [],
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "src/tsconfig.app.json",
+              "src/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "smsBoxAdminFrontend-e2e": {
+      "root": "e2e/",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "e2e/protractor.conf.js",
+            "devServerTarget": "smsBoxAdminFrontend:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "smsBoxAdminFrontend:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "smsBoxAdminFrontend"
+}

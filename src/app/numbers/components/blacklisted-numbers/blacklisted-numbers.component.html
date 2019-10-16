@@ -1,0 +1,93 @@
+<app-breadcrumb [breadcrumbList]="[{name:'Numbers', url:'notifications/dashboard'}, {name:'BlackListed Numbers List', url:''}]"></app-breadcrumb>
+
+<div class="g-pa-20">
+
+    <div class="g-brd-around g-brd-gray-light-v7 g-rounded-4 g-pa-15 g-pa-20--md g-mb-30">
+      <form [formGroup]="filterForm" (ngSubmit)="submitFilter('')">
+        <h3 class="g-mt-5 pull-left d-flex align-self-center text-uppercase g-font-size-12 g-font-size-default--md g-color-black">
+          <span class="d-flex align-self-center g-pos-rel g-font-size-18 g-mr-10"><i class="hs-admin-filter"></i></span>
+          Filter
+        </h3>
+        <button
+            type="button"
+            class="btn btn-md u-btn-secondary pull-right g-width-160--md g-font-size-12 g-font-size-default--md g-mb-10 g-mr-10"
+            routerLink="/admin/numbers/black-numbers/create">
+            Create New
+        </button>
+        <hr class="d-flex g-brd-gray-light-v7 g-my-15 g-mt-15--md g-mb-30--md" style="clear:both">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="g-mb-10" for="number">Number</label>
+              <div class="g-pos-rel">
+                <input
+                  id="number"
+                  formControlName="number"
+                  tabindex="1"
+                  placeholder="Number"
+                  type="text"
+                  autocomplete="off"
+                  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                  class="form-control form-control-md g-brd-gray-light-v7 g-brd-gray-light-v3--focus g-rounded-4 g-px-14 g-py-10">
+              </div>
+            </div>
+          </div>
+        </div>
+        <app-filter-form-tail (onReset)="resetFilterForm(filterForm)"></app-filter-form-tail>
+      </form>
+    </div>
+  <div id="scroll-to-here"></div>
+
+  <div class="table-responsive g-mb-20">
+    <table [style.display]="displayTable" class="table u-table--v3--bordered g-color-black">
+      <thead>
+        <tr>
+          <th class="g-bg-gray-light-v8 g-font-weight-400 g-valign-middle g-brd-bottom-none g-py-15 text-center">
+            <div class="d-flex align-items-center justify-content-between">Number</div>
+          </th>
+          <th class="g-bg-gray-light-v8 g-font-weight-400 g-valign-middle g-brd-bottom-none g-py-15">
+            <div class="d-flex align-items-center justify-content-between">Created On</div>
+          </th>
+          <th class="g-bg-gray-light-v8 g-font-weight-400 g-valign-middle g-brd-bottom-none g-py-15">
+            <div class="d-flex align-items-center justify-content-between">Created By Id</div>
+          </th>
+          <th class="g-bg-gray-light-v8 g-font-weight-400 g-valign-middle g-brd-bottom-none g-py-15">
+            <div class="d-flex align-items-center justify-content-between">Details</div>
+          </th>
+          <th class="g-bg-gray-light-v8 g-font-weight-400 g-valign-middle g-brd-bottom-none g-py-15">
+            <div class="d-flex align-items-center justify-content-between">Actions</div>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let blacklistedNumber of blacklistedNumbers">
+          <td class="g-hidden-sm-down g-valign-middle g-brd-top-none g-brd-bottom g-brd-gray-light-v7 g-py-15 g-py-30--md g-px-5 g-px-10--sm">{{blacklistedNumber.number}}</td>
+          <td class="g-hidden-sm-down g-valign-middle g-brd-top-none g-brd-bottom g-brd-gray-light-v7 g-py-15 g-py-30--md g-px-5 g-px-10--sm">{{blacklistedNumber.createdOn
+            | date: 'dd MMMM, yyyy - hh:mm:ss a'}}</td>
+          <td class="g-hidden-sm-down g-valign-middle g-brd-top-none g-brd-bottom g-brd-gray-light-v7 g-py-15 g-py-30--md g-px-5 g-px-10--sm">{{blacklistedNumber.createdById}}</td>
+          <td class="g-hidden-sm-down g-valign-middle g-brd-top-none g-brd-bottom g-brd-gray-light-v7 g-py-15 g-py-30--md g-px-5 g-px-10--sm">{{blacklistedNumber.details}}</td>
+          <td class="g-hidden-sm-down g-valign-middle g-brd-top-none g-brd-bottom g-brd-gray-light-v7 g-py-15 g-py-30--md g-px-5 g-px-10--sm">
+            <a
+              (click)="onDelete(blacklistedNumber.number)"
+              class="u-pagination-v1__item u-pagination-v1-2 g-bg-secondary--active g-color-white--active g-brd-gray-light-v7 g-brd-secondary--hover g-brd-secondary--active g-rounded-4 g-py-8 g-px-15">Delete</a></td>
+        </tr>
+
+        <tr *ngIf="notFound">
+          <td colspan="5" class="g-hidden-sm-down g-valign-middle g-brd-top-none g-brd-bottom g-brd-gray-light-v7 g-py-15 g-py-30--md g-px-5 g-px-10--sm">No
+            matching records found</td>
+        </tr>
+        <tr>
+          <td *ngIf="pageNumbers>0" colspan="5" class="g-hidden-sm-down g-valign-middle g-brd-top-none g-brd-bottom g-brd-gray-light-v7 g-py-15 g-py-30--md g-px-5 g-px-10--sm">
+            <app-page-size (changeSize)="onSizeChange($event)" (changePage)="onPageChange($event)" [totalCount]="totalCount"
+              [pagination]="pagination" [pageNumbers]="pageNumbers" [currentPaginationSelected]="currentPageSelected"
+              [selectedPage]="selectedPage">
+            </app-page-size>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <app-main-loader [style.display]="displayLoader"></app-main-loader>
+    <ng-template appConfirm><app-confirm-modal [withDetails]="true"></app-confirm-modal></ng-template>
+  </div>
+
+</div>

@@ -1,0 +1,201 @@
+<div class="g-hidden-sm-down g-bg-gray-light-v8 g-pa-20">
+    <div class="media">
+        <div class="d-flex align-self-center">
+            <span class="d-flex align-self-center g-font-size-18 g-mr-10">
+                <i class="hs-admin-pie-chart icon-of-page-title"></i>
+            </span>
+            <h1 class="g-font-weight-300 g-font-size-28 g-color-black mb-0">Logs</h1>
+        </div>
+    </div>
+</div>
+<div class="g-pa-20">
+    <div class="g-brd-around g-brd-gray-light-v7 g-rounded-4 g-pa-15 g-pa-20--md g-mb-30">
+      <form #f="ngForm" (ngSubmit)="submitFilter(f.value)">
+        <h3 class="d-flex align-self-center text-uppercase g-font-size-12 g-font-size-default--md g-color-black">
+          <span class="d-flex align-self-center g-pos-rel g-font-size-18 g-mr-10"><i class="hs-admin-filter"></i></span>
+          Filter</h3>
+        <hr class="d-flex g-brd-gray-light-v7 g-my-15 g-mt-15--md g-mb-30--md">
+        <div class="row">
+          <div class="col-md-3">
+            <div class="form-group">
+              <label class="g-mb-10">App Name</label>
+              <ng-select
+                [items]="appNames"
+                [(ngModel)]="selectedAppName"
+                [name]="'app_name'"
+                tabindex="'1'"
+                placeholder="Select App Name"
+                [searchable]="true"
+                [clearable]="false"
+                dropdownPosition="bottom"
+                bindLabel="name"
+                bindValue="_id"
+                class="u-select-dropdown--blue-theme u-sibling w-100">
+                <ng-template ng-label-tmp let-item="item">
+                  <span class="d-flex align-items-center w-100"><span> {{item.name}}</span></span>
+                </ng-template>
+                <ng-template ng-option-tmp let-item="item" let-index="index">
+                  <span class="d-flex align-items-center w-100"><span> {{item.name}}</span></span>
+                </ng-template>
+              </ng-select>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <!-- Select with Text -->
+            <div class="g-mb-30">
+                <label class="g-mb-10" for="logLevel">Log Level</label>
+                <ng-select
+                  [items]="logLevels"
+                  [(ngModel)]="selectedLogLevels"
+                  tabindex="3"
+                  name="logLevel"
+                  id="logLevel"
+                  placeholder="Select Log Level"
+                  [searchable]="false"
+                  [clearable]="false"
+                  dropdownPosition="bottom"
+                  bindLabel="name"
+                  bindValue="value"
+                  class="u-select-dropdown--blue-theme u-sibling w-100">
+                    <ng-template ng-label-tmp let-item="item">
+                        <span class="d-flex align-items-center w-100">
+                            <span
+                              *ngFor="let color of item.colors"
+                              class="{{color}} u-badge-v2--md g-pos-stc g-transform-origin--top-left g-mr-8"></span>
+                            <span> {{item.name}}</span>
+                        </span>
+                    </ng-template>
+                    <ng-template ng-option-tmp let-item="item" let-index="index">
+                        <span class="d-flex align-items-center w-100">
+                            <span
+                              *ngFor="let color of item.colors"
+                              class="{{color}} u-badge-v2--md g-pos-stc g-transform-origin--top-left g-mr-8"></span>
+                            <span> {{item.name}}</span>
+                        </span>
+                    </ng-template>
+                </ng-select>
+            </div>
+            <!-- End Select with Text -->
+          </div>
+          <div class="col-md-3">
+            <label class="g-mb-10">Created On From</label>
+            <div class="u-datepicker-right u-datepicker--v3 g-pos-rel w-100 g-cursor-pointer g-brd-around g-brd-gray-light-v7 g-rounded-4">
+              <input
+                flatpickr
+                id="createdOnFrom"
+                ngModel
+                name="createdOnFrom"
+                #createdOnFrom="ngModel"
+                type="text"
+                [dateFormat]="'Y-m-d'"
+                [allowInput]="true"
+                placeholder="Created On From"
+                mask="0000-00-00"
+                [dropSpecialCharacters]="false"
+                autocomplete="off"
+                class="js-range-datepicker-from w-100 g-bg-transparent g-font-size-12 g-font-size-default--md g-color-gray-dark-v6 g-pr-80 g-pl-15 g-py-9">
+              <div class="d-flex align-items-center g-absolute-centered--y g-right-0 g-color-gray-light-v6 g-color-lightblue-v9--sibling-opened g-mr-15">
+                <i class="hs-admin-calendar g-font-size-18 g-mr-10"></i>
+                <i class="hs-admin-angle-down"></i>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <label class="g-mb-10" for="createdOnTo">Created On To</label>
+            <div class="u-datepicker-right u-datepicker--v3 g-pos-rel w-100 g-cursor-pointer g-brd-around g-brd-gray-light-v7 g-rounded-4">
+              <input
+                flatpickr
+                id="createdOnTo"
+                ngModel
+                name="createdOnTo"
+                #createdOnTo="ngModel"
+                type="text"
+                [dateFormat]="'Y-m-d'"
+                [allowInput]="true"
+                placeholder="Created On To"
+                mask="0000-00-00"
+                [dropSpecialCharacters]="false"
+                autocomplete="off"
+                class="js-range-datepicker-to w-100 g-bg-transparent g-font-size-12 g-font-size-default--md g-color-gray-dark-v6 g-pr-80 g-pl-15 g-py-10">
+              <div class="d-flex align-items-center g-absolute-centered--y g-right-0 g-color-gray-light-v6 g-color-lightblue-v9--sibling-opened g-mr-15">
+                <i class="hs-admin-calendar g-font-size-18 g-mr-10"></i>
+                <i class="hs-admin-angle-down"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <app-filter-form-tail (onReset)="resetFilterForm(f)"></app-filter-form-tail>
+      </form>
+    </div>
+    <div id="scroll-to-here"></div>
+    <div class="table-responsive g-mb-20">
+        <table [style.display]="displayTable" class="table u-table--v3--bordered g-color-black">
+            <thead>
+                <tr>
+                    <th class="g-bg-gray-light-v8 g-font-weight-400 g-valign-middle g-brd-bottom-none g-py-15">
+                        <div class="d-flex align-items-center justify-content-between">Message</div>
+                    </th>
+                    <th class="g-bg-gray-light-v8 g-font-weight-400 g-valign-middle g-brd-bottom-none g-py-15">
+                        <div class="d-flex align-items-center justify-content-between">Log Level</div>
+                    </th>
+                    <th class="g-bg-gray-light-v8 g-font-weight-400 g-valign-middle g-brd-bottom-none g-py-15">
+                        <div class="d-flex align-items-center justify-content-between">App Name</div>
+                    </th>
+                    <th class="g-bg-gray-light-v8 g-font-weight-400 g-valign-middle g-brd-bottom-none g-py-15">
+                        <div class="d-flex align-items-center justify-content-between">Created On</div>
+                    </th>
+                    <th class="g-bg-gray-light-v8 g-font-weight-400 g-valign-middle g-brd-bottom-none g-py-15">
+                        <div class="d-flex align-items-center justify-content-between">Actions</div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngIf="notFound">
+                    <td colspan="5" class="g-hidden-sm-down g-valign-middle g-brd-top-none g-brd-bottom g-brd-gray-light-v7 g-py-15 g-py-30--md g-px-5 g-px-10--sm">No matching records found</td>
+                </tr>
+                <tr *ngFor="let log of logs">
+                    <td style="width:33%" class="g-hidden-sm-down g-valign-middle g-brd-top-none g-brd-bottom g-brd-gray-light-v7 g-py-15 g-py-30--md g-px-5 g-px-10--sm">{{log.message}}</td>
+                    <td class="g-hidden-sm-down g-valign-middle g-brd-top-none g-brd-bottom g-brd-gray-light-v7 g-py-15 g-py-30--md g-px-5 g-px-10--sm">
+
+                        <span *ngIf="log.logLevel == 10" class="d-flex align-items-center justify-content-center u-tags-v1  g-font-size-default g-brd-white g-py-4 g-px-15">
+                            <span class="u-badge-v2--md g-pos-stc g-transform-origin--top-left  g-bg-teal-v2 g-mr-8"></span>
+                            {{LOGLEVEL[log.logLevel]}}
+                        </span>
+                        <span *ngIf="log.logLevel == 20" class="d-flex align-items-center justify-content-center u-tags-v1  g-font-size-default  g-brd-white g-py-4 g-px-15">
+                            <span class="u-badge-v2--md g-pos-stc g-transform-origin--top-left g-bg-lightbrown g-mr-8"></span>
+                            {{LOGLEVEL[log.logLevel]}}
+                        </span>
+                        <span *ngIf="log.logLevel == 30" class="d-flex align-items-center justify-content-center u-tags-v1  g-font-size-default g-brd-white g-py-4 g-px-15">
+                            <span class="u-badge-v2--md g-pos-stc g-transform-origin--top-left  g-bg-lightred-v2 g-mr-8"></span>
+                            {{LOGLEVEL[log.logLevel]}}
+                        </span>
+                        <span *ngIf="log.logLevel == 40" class="d-flex align-items-center justify-content-center u-tags-v1  g-font-size-default  g-brd-white g-py-4 g-px-15">
+                            <span class="u-badge-v2--md g-pos-stc g-transform-origin--top-left g-bg-lightred-v2  g-mr-8"></span>
+                            {{LOGLEVEL[log.logLevel]}}
+                        </span>
+                    </td>
+                    <td class="g-hidden-sm-down g-valign-middle g-brd-top-none g-brd-bottom g-brd-gray-light-v7 g-py-15 g-py-30--md g-px-5 g-px-10--sm">{{log.app_name}}</td>
+                    <td class="g-hidden-sm-down g-valign-middle g-brd-top-none g-brd-bottom g-brd-gray-light-v7 g-py-15 g-py-30--md g-px-5 g-px-10--sm">{{log.createdOn | date: 'dd MMMM, yyyy - hh:mm:ss a'}}</td>
+                    <td class="g-hidden-sm-down g-valign-middle g-brd-top-none g-brd-bottom g-brd-gray-light-v7 g-py-15 g-py-30--md g-px-5 g-px-10--sm">
+                      <a  routerLink="/admin/logs/details/{{log._id}}" class="u-pagination-v1__item u-pagination-v1-2 g-bg-secondary--active g-color-white--active g-brd-gray-light-v7 g-brd-secondary--hover g-brd-secondary--active g-rounded-4 g-py-8 g-px-15">Details</a>
+                    </td>
+                </tr>
+                <tr *ngIf="pageNumbers>0">
+                    <td colspan="5" class="g-hidden-sm-down g-valign-middle g-brd-top-none g-brd-bottom g-brd-gray-light-v7 g-py-15 g-py-30--md g-px-5 g-px-10--sm">
+                        <app-page-size
+                        (changeSize)="onSizeChange($event)"
+                        (changePage)="onPageChange($event)"
+                        [totalCount]="totalCount"
+                        [pagination]="pagination"
+                        [pageNumbers]="pageNumbers"
+                        [currentPaginationSelected]="currentPageSelected"
+                        [selectedPage]="selectedPage">
+                        </app-page-size>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <app-main-loader [style.display]="displayLoader"></app-main-loader>
+</div>

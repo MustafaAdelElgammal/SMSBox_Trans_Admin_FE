@@ -1,0 +1,25 @@
+<div [formGroup]="parentForm">
+  <label class="g-mb-10">{{label}} <span *ngIf="isRequired" style="color: red">*</span></label>
+  <ng-select
+      [items]="messageTypes"
+      [formControlName]="inputFormName"
+      [tabindex]="tabNumber"
+      [placeholder]="placeHolder"
+      [searchable]="true"
+      [clearable]="true"
+      dropdownPosition="bottom"
+      bindLabel="name"
+      bindValue="num"
+      [ngClass]="{'ng-invalid ng-touched ng-custom': hasError && isRequired}"
+      class="u-select-dropdown--blue-theme u-sibling w-100">
+      <ng-template ng-label-tmp let-item="item">
+          <span class="d-flex align-items-center w-100"><span> {{item.name | ReplaceUnderscoreWithSpace}}</span></span>
+      </ng-template>
+      <ng-template ng-option-tmp let-item="item" let-index="index">
+          <span class="d-flex align-items-center w-100"><span> {{item.name | ReplaceUnderscoreWithSpace}}</span></span>
+      </ng-template>
+  </ng-select>
+  <small class="g-font-weight-300 g-font-size-12 g-color-lightred-v3  g-pt-5">
+      <span *ngIf="hasError && isRequired">{{label}} is required</span>
+  </small>
+</div>

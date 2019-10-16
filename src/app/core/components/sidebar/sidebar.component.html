@@ -1,0 +1,332 @@
+<div id="side-bar-navigation" class="side-bar-navigation js-custom-scroll u-sidebar-navigation-v1-inner">
+    <ul id="sideNavMenu" class="u-sidebar-navigation-v1-menu u-side-nav--top-level-menu g-min-height-80vh mb-0">
+        <!-- Dashboard -->
+        <li class="u-sidebar-navigation-v1-menu-item u-side-nav--top-level-menu-item">
+          <a routerLink="/admin/dashboard" routerLinkActive="active" class="media u-side-nav--top-level-menu-link u-side-nav--hide-on-hidden g-px-15 g-py-12">
+            <span class="d-flex align-self-center g-font-size-18 g-mr-18">
+              <i class="hs-admin-server"></i>
+            </span>
+            <span class="media-body align-self-center">Dashboard</span>
+          </a>
+        </li>
+        <!-- Users -->
+        <li class="u-sidebar-navigation-v1-menu-item u-side-nav--has-sub-menu u-side-nav--top-level-menu-item">
+          <a class="media u-side-nav--top-level-menu-link u-side-nav--hide-on-hidden g-px-15 g-py-12" data-hssm-target="#users" href="javascript:void(0)">
+            <span class="d-flex align-self-center g-pos-rel g-font-size-18 g-mr-18"><i class="hs-admin-user"></i></span>
+            <span class="media-body align-self-center">Users</span>
+            <span class="d-flex align-self-center u-side-nav--control-icon"><i class="hs-admin-angle-right"></i></span>
+            <span class="u-side-nav--has-sub-menu__indicator"></span>
+          </a>
+          <ul id="users" class="u-sidebar-navigation-v1-menu u-side-nav--second-level-menu mb-0">
+
+            <!-- Dashboard -->
+            <li class="u-sidebar-navigation-v1-menu-item u-side-nav--second-level-menu-item">
+              <a routerLink="/admin/users/dashboard" routerLinkActive="active" class="media u-side-nav--second-level-menu-link g-px-15 g-py-12">
+                <span class="d-flex align-self-center g-mr-15 g-mt-minus-1">
+                  <i class="hs-admin-server"></i>
+                </span>
+                <span class="media-body align-self-center">Dashboard</span>
+              </a>
+            </li>
+
+            <!-- List -->
+            <li class="u-sidebar-navigation-v1-menu-item u-side-nav--second-level-menu-item">
+              <a routerLink="/admin/users/list" routerLinkActive="active" class="media u-side-nav--second-level-menu-link g-px-15 g-py-12">
+                <span class="d-flex align-self-center g-mr-15 g-mt-minus-1">
+                  <i class="hs-admin-layout-list-thumb"></i>
+                </span>
+                <span class="media-body align-self-center">List</span>
+              </a>
+            </li>
+
+            <!-- Add Package -->
+            <li class="u-sidebar-navigation-v1-menu-item u-side-nav--second-level-menu-item">
+              <a routerLink="/admin/users/addPackage" routerLinkActive="active" class="media u-side-nav--second-level-menu-link g-px-15 g-py-12">
+                <span class="d-flex align-self-center g-mr-15 g-mt-minus-1">
+                  <i class="hs-admin-layout-list-thumb"></i>
+                </span>
+                <span class="media-body align-self-center">Add Package</span>
+              </a>
+            </li>
+
+          </ul>
+        </li>
+        <!-- Networks -->
+        <li class="u-sidebar-navigation-v1-menu-item u-side-nav--has-sub-menu u-side-nav--top-level-menu-item">
+          <a class="media u-side-nav--top-level-menu-link u-side-nav--hide-on-hidden g-px-15 g-py-12" data-hssm-target="#networks" href="javascript:void(0)">
+            <span class="d-flex align-self-center g-pos-rel g-font-size-18 g-mr-18"><i class="hs-admin-receipt"></i></span>
+            <span class="media-body align-self-center">Networks</span>
+            <span class="d-flex align-self-center u-side-nav--control-icon"><i class="hs-admin-angle-right"></i></span>
+            <span class="u-side-nav--has-sub-menu__indicator"></span>
+          </a>
+          <ul id="networks" class="u-sidebar-navigation-v1-menu u-side-nav--second-level-menu mb-0">
+            <!-- Dashboard -->
+            <li class="u-sidebar-navigation-v1-menu-item u-side-nav--second-level-menu-item">
+              <a routerLink="/admin/networks/dashboard" routerLinkActive="active" class="media u-side-nav--second-level-menu-link g-px-15 g-py-12">
+                <span class="d-flex align-self-center g-mr-15 g-mt-minus-1">
+                  <i class="hs-admin-server"></i>
+                </span>
+                <span class="media-body align-self-center">Dashboard</span>
+              </a>
+            </li>
+            <!-- List -->
+            <li class="u-sidebar-navigation-v1-menu-item u-side-nav--second-level-menu-item">
+              <a routerLink="/admin/networks/list" routerLinkActive="active" class="media u-side-nav--second-level-menu-link g-px-15 g-py-12">
+                <span class="d-flex align-self-center g-mr-15 g-mt-minus-1">
+                  <i class="hs-admin-layout-list-thumb"></i>
+                </span>
+                <span class="media-body align-self-center">List</span>
+              </a>
+            </li>
+            <!-- Create -->
+            <li class="u-sidebar-navigation-v1-menu-item u-side-nav--second-level-menu-item">
+              <a routerLink="/admin/networks/create" routerLinkActive="active" class="media u-side-nav--second-level-menu-link g-px-15 g-py-12">
+                <span class="d-flex align-self-center g-mr-15 g-mt-minus-1">
+                  <i class="hs-admin-layout-list-thumb"></i>
+                </span>
+                <span class="media-body align-self-center">Create</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <!-- Providers -->
+        <li class="u-sidebar-navigation-v1-menu-item u-side-nav--has-sub-menu u-side-nav--top-level-menu-item">
+          <a class="media u-side-nav--top-level-menu-link u-side-nav--hide-on-hidden g-px-15 g-py-12" data-hssm-target="#providers" href="javascript:void(0)">
+            <span class="d-flex align-self-center g-pos-rel g-font-size-18 g-mr-18"><i class="hs-admin-panel"></i></span>
+            <span class="media-body align-self-center">Providers</span>
+            <span class="d-flex align-self-center u-side-nav--control-icon"><i class="hs-admin-angle-right"></i></span>
+            <span class="u-side-nav--has-sub-menu__indicator"></span>
+          </a>
+          <ul id="providers" class="u-sidebar-navigation-v1-menu u-side-nav--second-level-menu mb-0"></ul>
+        </li>
+        <!-- Senders -->
+        <li class="u-sidebar-navigation-v1-menu-item u-side-nav--has-sub-menu u-side-nav--top-level-menu-item">
+          <a class="media u-side-nav--top-level-menu-link u-side-nav--hide-on-hidden g-px-15 g-py-12" data-hssm-target="#senders" href="javascript:void(0)">
+            <span class="d-flex align-self-center g-pos-rel g-font-size-18 g-mr-18"><i class="hs-admin-target"></i></span>
+            <span class="media-body align-self-center">Senders</span>
+            <span class="d-flex align-self-center u-side-nav--control-icon"><i class="hs-admin-angle-right"></i></span>
+            <span class="u-side-nav--has-sub-menu__indicator"></span>
+          </a>
+          <ul id="senders" class="u-sidebar-navigation-v1-menu u-side-nav--second-level-menu mb-0"></ul>
+        </li>
+        <!-- Numbers -->
+        <li class="u-sidebar-navigation-v1-menu-item u-side-nav--has-sub-menu u-side-nav--top-level-menu-item">
+          <a class="media u-side-nav--top-level-menu-link u-side-nav--hide-on-hidden g-px-15 g-py-12" data-hssm-target="#numbers" href="javascript:void(0)">
+            <span class="d-flex align-self-center g-pos-rel g-font-size-18 g-mr-18"><i class="hs-admin-receipt"></i></span>
+            <span class="media-body align-self-center">Numbers</span>
+            <span class="d-flex align-self-center u-side-nav--control-icon"><i class="hs-admin-angle-right"></i></span>
+            <span class="u-side-nav--has-sub-menu__indicator"></span>
+          </a>
+          <ul id="numbers" class="u-sidebar-navigation-v1-menu u-side-nav--second-level-menu mb-0">
+            <!-- Dashboard -->
+            <li class="u-sidebar-navigation-v1-menu-item u-side-nav--second-level-menu-item">
+              <a routerLink="/admin/numbers/dashboard" routerLinkActive="active" class="media u-side-nav--second-level-menu-link g-px-15 g-py-12">
+                <span class="d-flex align-self-center g-mr-15 g-mt-minus-1">
+                  <i class="hs-admin-server"></i>
+                </span>
+                <span class="media-body align-self-center">Dashboard</span>
+              </a>
+            </li>
+            <!-- List -->
+            <!-- TODO Change component name -->
+            <li class="u-sidebar-navigation-v1-menu-item u-side-nav--second-level-menu-item">
+              <a routerLink="/admin/numbers/ported-numbers/list" routerLinkActive="active" class="media u-side-nav--second-level-menu-link g-px-15 g-py-12">
+                <span class="d-flex align-self-center g-mr-15 g-mt-minus-1">
+                  <i class="hs-admin-layout-list-thumb"></i>
+                </span>
+                <span class="media-body align-self-center">Search Ported Numbers</span>
+              </a>
+            </li>
+            <!-- Create -->
+            <li class="u-sidebar-navigation-v1-menu-item u-side-nav--second-level-menu-item">
+              <a routerLink="/admin/numbers/ported-numbers/create" routerLinkActive="active" class="media u-side-nav--second-level-menu-link g-px-15 g-py-12">
+                <span class="d-flex align-self-center g-mr-15 g-mt-minus-1">
+                  <i class="hs-admin-layout-list-thumb"></i>
+                </span>
+                <span class="media-body align-self-center">Create Ported Number</span>
+              </a>
+            </li>
+            <!-- List -->
+            <li class="u-sidebar-navigation-v1-menu-item u-side-nav--second-level-menu-item">
+              <a routerLink="/admin/numbers/black-numbers/list" routerLinkActive="active" class="media u-side-nav--second-level-menu-link g-px-15 g-py-12">
+                <span class="d-flex align-self-center g-mr-15 g-mt-minus-1">
+                  <i class="hs-admin-layout-list-thumb"></i>
+                </span>
+                <span class="media-body align-self-center">Black List Numbers </span>
+              </a>
+            </li>
+            <!-- Create -->
+            <li class="u-sidebar-navigation-v1-menu-item u-side-nav--second-level-menu-item">
+              <a routerLink="/admin/numbers/black-numbers/create" routerLinkActive="active" class="media u-side-nav--second-level-menu-link g-px-15 g-py-12">
+                <span class="d-flex align-self-center g-mr-15 g-mt-minus-1">
+                  <i class="hs-admin-layout-list-thumb"></i>
+                </span>
+                <span class="media-body align-self-center">Create Black List Numbers</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <!-- Balance Package -->
+        <li class="u-sidebar-navigation-v1-menu-item u-side-nav--has-sub-menu u-side-nav--top-level-menu-item">
+          <a class="media u-side-nav--top-level-menu-link u-side-nav--hide-on-hidden g-px-15 g-py-12" href="javascript:void(0)"
+            data-hssm-target="#balancePackage">
+            <span class="d-flex align-self-center g-pos-rel g-font-size-18 g-mr-18"><i class="hs-admin-package"></i></span>
+            <span class="media-body align-self-center">Balance Package</span>
+            <span class="d-flex align-self-center u-side-nav--control-icon"><i class="hs-admin-angle-right"></i></span>
+            <span class="u-side-nav--has-sub-menu__indicator"></span>
+          </a>
+          <ul id="balancePackage" class="u-sidebar-navigation-v1-menu u-side-nav--second-level-menu mb-0">
+            <!-- Dashboard -->
+            <li class="u-sidebar-navigation-v1-menu-item u-side-nav--second-level-menu-item">
+              <a routerLink="/admin/balance_packages/dashboard" routerLinkActive="active" class="media u-side-nav--second-level-menu-link g-px-15 g-py-12">
+                <span class="d-flex align-self-center g-mr-15 g-mt-minus-1">
+                  <i class="hs-admin-server"></i>
+                </span>
+                <span class="media-body align-self-center">Dashboard</span>
+              </a>
+            </li>
+            <!-- List -->
+            <li class="u-sidebar-navigation-v1-menu-item u-side-nav--second-level-menu-item">
+              <a routerLink="/admin/balance_packages/list" routerLinkActive="active" class="media u-side-nav--second-level-menu-link g-px-15 g-py-12">
+                <span class="d-flex align-self-center g-mr-15 g-mt-minus-1">
+                  <i class="hs-admin-layout-list-thumb"></i>
+                </span>
+                <span class="media-body align-self-center">List</span>
+              </a>
+            </li>
+            <!-- Create -->
+            <li class="u-sidebar-navigation-v1-menu-item u-side-nav--second-level-menu-item">
+              <a routerLink="/admin/balance_packages/create" routerLinkActive="active" class="media u-side-nav--second-level-menu-link g-px-15 g-py-12">
+                <span class="d-flex align-self-center g-mr-15 g-mt-minus-1">
+                  <i class="hs-admin-layout-list-thumb"></i>
+                </span>
+                <span class="media-body align-self-center">Create</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <!-- Admin Users -->
+        <li class="u-sidebar-navigation-v1-menu-item u-side-nav--has-sub-menu u-side-nav--top-level-menu-item">
+          <a class="media u-side-nav--top-level-menu-link u-side-nav--hide-on-hidden g-px-15 g-py-12" data-hssm-target="#adminUsers" href="javascript:void(0)">
+            <span class="d-flex align-self-center g-pos-rel g-font-size-18 g-mr-18"><i class="hs-admin-user"></i></span>
+            <span class="media-body align-self-center">Admin Users</span>
+            <span class="d-flex align-self-center u-side-nav--control-icon"><i class="hs-admin-angle-right"></i></span>
+            <span class="u-side-nav--has-sub-menu__indicator"></span>
+          </a>
+          <ul id="adminUsers" class="u-sidebar-navigation-v1-menu u-side-nav--second-level-menu mb-0">
+            <!-- Dashboard -->
+            <li class="u-sidebar-navigation-v1-menu-item u-side-nav--second-level-menu-item">
+              <a routerLink="/admin/admin_users/dashboard" routerLinkActive="active" class="media u-side-nav--second-level-menu-link g-px-15 g-py-12">
+                <span class="d-flex align-self-center g-mr-15 g-mt-minus-1">
+                  <i class="hs-admin-server"></i>
+                </span>
+                <span class="media-body align-self-center">Dashboard</span>
+              </a>
+            </li>
+            <!-- List -->
+            <li class="u-sidebar-navigation-v1-menu-item u-side-nav--second-level-menu-item">
+              <a routerLink="/admin/admin_users/list" routerLinkActive="active" class="media u-side-nav--second-level-menu-link g-px-15 g-py-12">
+                <span class="d-flex align-self-center g-mr-15 g-mt-minus-1">
+                  <i class="hs-admin-layout-list-thumb"></i>
+                </span>
+                <span class="media-body align-self-center">List</span>
+              </a>
+            </li>
+            <!-- Create users -->
+            <li class="u-sidebar-navigation-v1-menu-item u-side-nav--second-level-menu-item">
+              <a routerLink="/admin/admin_users/create" routerLinkActive="active" class="media u-side-nav--second-level-menu-link g-px-15 g-py-12">
+                <span class="d-flex align-self-center g-mr-15 g-mt-minus-1">
+                  <i class="hs-admin-layout-list-thumb"></i>
+                </span>
+                <span class="media-body align-self-center">Create</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <!-- Notifications -->
+        <li class="u-sidebar-navigation-v1-menu-item u-side-nav--has-sub-menu u-side-nav--top-level-menu-item">
+            <a class="media u-side-nav--top-level-menu-link u-side-nav--hide-on-hidden g-px-15 g-py-12" data-hssm-target="#notifications" href="javascript:void(0)">
+                <span class="d-flex align-self-center g-pos-rel g-font-size-18 g-mr-18"><i class="hs-admin-layout-list-thumb"></i></span>
+                <span class="media-body align-self-center">Notifications</span>
+                <span class="d-flex align-self-center u-side-nav--control-icon"><i class="hs-admin-angle-right"></i></span>
+                <span class="u-side-nav--has-sub-menu__indicator"></span>
+            </a>
+            <ul id="notifications" class="u-sidebar-navigation-v1-menu u-side-nav--second-level-menu mb-0">
+                <!-- Dashboard -->
+                <li class="u-sidebar-navigation-v1-menu-item u-side-nav--second-level-menu-item">
+                    <a routerLink="/admin/notifications/dashboard" routerLinkActive="active" class="media u-side-nav--second-level-menu-link g-px-15 g-py-12">
+                        <span class="d-flex align-self-center g-mr-15 g-mt-minus-1"><i class="hs-admin-server"></i></span>
+                        <span class="media-body align-self-center">Dashboard</span>
+                    </a>
+                </li>
+                <li class="u-sidebar-navigation-v1-menu-item u-side-nav--has-sub-menu u-side-nav--second-level-menu-item">
+                    <a class="media u-side-nav--second-level-menu-link g-px-15 g-py-12" href="#!" data-hssm-target="#subMenuLevels2">
+                        <span class="d-flex align-self-center g-mr-15 g-mt-minus-1"><i class="hs-admin-list"></i></span>
+                        <span class="media-body align-self-center">Accounts</span>
+                        <span class="d-flex align-self-center u-side-nav--control-icon"><i class="hs-admin-angle-right"></i></span>
+                    </a>
+                    <ul id="subMenuLevels2" class="u-side-nav--third-level-menu">
+                        <li class="u-side-nav--third-level-menu-item u-side-nav--has-sub-menu">
+                            <a class="media d-flex u-side-nav--third-level-menu-link u-side-nav--hide-on-hidden g-pl-8 g-pr-15 g-py-6" href="#!" data-hssm-target="#subMenuLevels3">
+                                <span class="media-body align-self-center">EMAIL</span>
+                                <span class="d-flex align-self-center u-side-nav--control-icon">
+                                    <i class="hs-admin-angle-right"></i>
+                                </span>
+                            </a>
+                            <ul id="subMenuLevels3" class="u-side-nav--fourth-level-menu">
+                                <li class="u-side-nav--fourth-level-menu-item">
+                                    <a routerLink="/admin/notifications/email-accounts-list" routerLinkActive="active" class="media u-side-nav--second-level-menu-link g-px-15 g-py-12">
+                                        <span class="media-body align-self-center">List</span>
+                                    </a>
+                                </li>
+                                <li class="u-side-nav--fourth-level-menu-item">
+                                    <a routerLink="/admin/notifications/email-accounts-create" routerLinkActive="active" class="media u-side-nav--second-level-menu-link g-px-15 g-py-12">
+                                        <span class="media-body align-self-center">Create</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="u-side-nav--third-level-menu-item u-side-nav--has-sub-menu">
+                            <a class="media d-flex u-side-nav--third-level-menu-link u-side-nav--hide-on-hidden g-pl-8 g-pr-15 g-py-6" href="#!" data-hssm-target="#subMenuLevels4">
+                                <span class="media-body align-self-center">SMS</span>
+                                <span class="d-flex align-self-center u-side-nav--control-icon">
+                                    <i class="hs-admin-angle-right"></i>
+                                </span>
+                            </a>
+                            <ul id="subMenuLevels4" class="u-side-nav--fourth-level-menu">
+                                <li class="u-side-nav--fourth-level-menu-item">
+                                    <a routerLink="/admin/notifications/sms-accounts-list" routerLinkActive="active" class="media u-side-nav--second-level-menu-link g-px-15 g-py-12">
+                                        <span class="media-body align-self-center">List</span>
+                                    </a>
+                                </li>
+                                <li class="u-side-nav--fourth-level-menu-item">
+                                  <a routerLink="/admin/notifications/sms-accounts-create" routerLinkActive="active" class="media u-side-nav--second-level-menu-link g-px-15 g-py-12">
+                                      <span class="media-body align-self-center">Create</span>
+                                  </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <!-- Log -->
+        <li class="u-sidebar-navigation-v1-menu-item u-side-nav--top-level-menu-item">
+          <a routerLink="/admin/logs" routerLinkActive="active" class="media u-side-nav--top-level-menu-link u-side-nav--hide-on-hidden g-px-15 g-py-12">
+            <span class="d-flex align-self-center g-font-size-18 g-mr-18">
+              <i class="hs-admin-pie-chart"></i>
+            </span>
+            <span class="media-body align-self-center">Logs</span>
+          </a>
+        </li>
+        <!-- Activity Log -->
+        <li class="u-sidebar-navigation-v1-menu-item u-side-nav--top-level-menu-item">
+          <a routerLink="/admin/activity_logs" routerLinkActive="active" class="media u-side-nav--top-level-menu-link u-side-nav--hide-on-hidden g-px-15 g-py-12">
+            <span class="d-flex align-self-center g-font-size-18 g-mr-18">
+              <i class="hs-admin-medall"></i>
+            </span>
+            <span class="media-body align-self-center">Activity Logs</span>
+          </a>
+        </li>
+    </ul>
+</div>

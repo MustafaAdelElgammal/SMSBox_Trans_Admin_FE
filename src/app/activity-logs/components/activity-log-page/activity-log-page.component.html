@@ -1,0 +1,159 @@
+<div>
+    <div class="g-hidden-sm-down g-bg-gray-light-v8 g-pa-20">
+        <div class="media">
+            <div class="d-flex align-self-center">
+                <span class="d-flex align-self-center g-font-size-18 g-mr-10">
+                    <i class="hs-admin-medall icon-of-page-title"></i>
+                </span>
+                <h1 class="g-font-weight-300 g-font-size-28 g-color-black mb-0">Activity Logs</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="g-pa-20">
+        <div class="g-brd-around g-brd-gray-light-v7 g-rounded-4 g-pa-15 g-pa-20--md g-mb-30">
+          <form #f="ngForm" (ngSubmit)="submitFilter(f.value)">
+            <h3 class="d-flex align-self-center text-uppercase g-font-size-12 g-font-size-default--md g-color-black">
+              <span class="d-flex align-self-center g-pos-rel g-font-size-18 g-mr-10"><i class="hs-admin-filter"></i></span>
+              Filter</h3>
+            <hr class="d-flex g-brd-gray-light-v7 g-my-15 g-mt-15--md g-mb-30--md">
+            <div class="row">
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label class="g-mb-10">User</label>
+                  <ng-select
+                    [items]="adminUsers"
+                    [(ngModel)]="selectedUser"
+                    tabindex="1"
+                    placeholder="Select User"
+                    [searchable]="true"
+                    [clearable]="false"
+                    dropdownPosition="bottom"
+                    bindLabel="email"
+                    bindValue="_id"
+                    [ngModel]="'userId'"
+                    [name]="'userId'"
+                    class="u-select-dropdown--blue-theme u-sibling w-100">
+                    <ng-template ng-label-tmp let-item="item">
+                      <span class="d-flex align-items-center w-100"><span> {{item.email}}</span></span>
+                    </ng-template>
+                    <ng-template ng-option-tmp let-item="item" let-index="index">
+                      <span class="d-flex align-items-center w-100"><span> {{item.email}}</span></span>
+                    </ng-template>
+                  </ng-select>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                    <label class="g-mb-10" for="activity">Activity</label>
+                    <div class="g-pos-rel">
+                        <input
+                          id="activity"
+                          ngModel
+                          tabindex="1"
+                          name="activity"
+                          #activity="ngModel"
+                          placeholder="Activity"
+                          type="text"
+                          autocomplete="off"
+                          class="form-control form-control-md g-brd-gray-light-v7 g-brd-gray-light-v3--focus g-rounded-4 g-px-14 g-py-10">
+                    </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <label class="g-mb-10">Created On From</label>
+                <div class="u-datepicker-right u-datepicker--v3 g-pos-rel w-100 g-cursor-pointer g-brd-around g-brd-gray-light-v7 g-rounded-4">
+                  <input
+                    flatpickr
+                    id="createdOnFrom"
+                    ngModel
+                    name="createdOnFrom"
+                    #createdOnFrom="ngModel"
+                    type="text"
+                    placeholder="Created On From"
+                    [dateFormat]="'Y-m-d'"
+                    [allowInput]="true"
+                    mask="0000-00-00"
+                    [dropSpecialCharacters]="false"
+                    autocomplete="off"
+                    class="js-range-datepicker-from w-100 g-bg-transparent g-font-size-12 g-font-size-default--md g-color-gray-dark-v6 g-pr-80 g-pl-15 g-py-9">
+                  <div class="d-flex align-items-center g-absolute-centered--y g-right-0 g-color-gray-light-v6 g-color-lightblue-v9--sibling-opened g-mr-15">
+                    <i class="hs-admin-calendar g-font-size-18 g-mr-10"></i>
+                    <i class="hs-admin-angle-down"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <label class="g-mb-10" for="createdOnTo">Created On To</label>
+                <div class="u-datepicker-right u-datepicker--v3 g-pos-rel w-100 g-cursor-pointer g-brd-around g-brd-gray-light-v7 g-rounded-4">
+                  <input
+                    flatpickr
+                    id="createdOnTo"
+                    ngModel
+                    name="createdOnTo"
+                    #createdOnTo="ngModel"
+                    type="text"
+                    [dateFormat]="'Y-m-d'"
+                    [allowInput]="true"
+                    placeholder="Created On To"
+                    mask="0000-00-00"
+                    [dropSpecialCharacters]="false"
+                    autocomplete="off"
+                    class="js-range-datepicker-to w-100 g-bg-transparent g-font-size-12 g-font-size-default--md g-color-gray-dark-v6 g-pr-80 g-pl-15 g-py-10">
+                  <div class="d-flex align-items-center g-absolute-centered--y g-right-0 g-color-gray-light-v6 g-color-lightblue-v9--sibling-opened g-mr-15">
+                    <i class="hs-admin-calendar g-font-size-18 g-mr-10"></i>
+                    <i class="hs-admin-angle-down"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <app-filter-form-tail (onReset)="resetFilterForm(f)"></app-filter-form-tail>
+          </form>
+        </div>
+        <div id="scroll-to-here"></div>
+        <div class="table-responsive table w-100 g-mb-25">
+            <table [style.display]="displayTable" class="table u-table--v3--bordered g-color-black">
+                <thead class="g-hidden-sm-down g-color-gray-dark-v6">
+                    <tr>
+                        <th class="g-bg-gray-light-v8 g-font-weight-400 g-valign-middle g-brd-bottom-none g-py-15">
+                          <div class="d-flex align-items-center justify-content-between">Email</div>
+                        </th>
+                        <th class="g-bg-gray-light-v8 g-font-weight-400 g-valign-middle g-brd-bottom-none g-py-15">
+                          <div class="d-flex align-items-center justify-content-between">Activity</div>
+                        </th>
+                        <th class="g-bg-gray-light-v8 g-font-weight-400 g-valign-middle g-brd-bottom-none g-py-15">
+                          <div class="d-flex align-items-center justify-content-between">Created On</div>
+                        </th>
+                        <th class="g-bg-gray-light-v8 g-font-weight-400 g-valign-middle g-brd-bottom-none g-py-15">
+                          <div class="d-flex align-items-center justify-content-between">Actions</div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngIf="notFound"><td colspan="4" class="g-hidden-sm-down g-valign-middle g-brd-top-none g-brd-bottom g-brd-gray-light-v7 g-py-15 g-py-30--md g-px-5 g-px-10--sm">No matching records found</td></tr>
+                    <tr *ngFor="let log of logsActivity">
+                        <td class="g-hidden-sm-down g-valign-middle g-brd-top-none g-brd-bottom g-brd-gray-light-v7 g-py-15 g-py-30--md g-px-5 g-px-10--sm">{{log.email}}</td>
+                        <td class="g-hidden-sm-down g-valign-middle g-brd-top-none g-brd-bottom g-brd-gray-light-v7 g-py-15 g-py-30--md g-px-5 g-px-10--sm">{{log.activity}}</td>
+                        <td class="g-hidden-sm-down g-valign-middle g-brd-top-none g-brd-bottom g-brd-gray-light-v7 g-py-15 g-py-30--md g-px-5 g-px-10--sm">{{log.createdOn | date: 'dd MMMM, yyyy - hh:mm:ss a'}}</td>
+                        <td class="g-hidden-sm-down g-valign-middle text-center g-brd-top-none g-brd-bottom g-brd-gray-light-v7 g-py-15 g-py-30--md g-px-5 g-px-10--sm"><a routerLink="/admin/activity_logs/details/{{log._id}}" class="u-pagination-v1__item u-pagination-v1-2 g-bg-secondary--active g-color-white--active g-brd-gray-light-v7 g-brd-secondary--hover g-brd-secondary--active g-rounded-4 g-py-8 g-px-15">Details</a></td>
+                    </tr>
+                    <tr>
+                        <td *ngIf="pageNumbers>0" colspan="4" class="g-hidden-sm-down g-valign-middle g-brd-top-none g-brd-bottom g-brd-gray-light-v7 g-py-15 g-py-30--md g-px-5 g-px-10--sm">
+                            <app-page-size
+
+                                (changeSize)="onSizeChange($event)"
+                                (changePage)="onPageChange($event)"
+                                [totalCount]="totalCount"
+                                [pagination]="pagination"
+                                [pageNumbers]="pageNumbers"
+                                [currentPaginationSelected]="currentPageSelected"
+                                [selectedPage]="selectedPage">
+                            </app-page-size>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <app-main-loader [style.display]="displayLoader"></app-main-loader>
+    </div>
+</div>

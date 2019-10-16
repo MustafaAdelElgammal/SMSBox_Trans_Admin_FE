@@ -1,0 +1,117 @@
+<app-breadcrumb  *ngIf="currentPackage != null" [breadcrumbList]="[{name:'Balance Packages', url:'balance_packages/dashboard'},{name:'List', url:'balance_packages/list'},{name:currentPackage.name, url:''}]"></app-breadcrumb>
+<div class="g-pa-20">
+    <ngb-tabset *ngIf="currentPackage != null">
+        <ngb-tab>
+            <ng-template ngbTabTitle>
+                <b>
+                    <span class="g-color-gray-dark-v6 g-color-primary--parent-hover g-color-primary--parent-active">PACKAGE DETAILS</span>
+                </b>
+            </ng-template>
+            <ng-template ngbTabContent>
+                <div class="g-pos-rel h-100 g-brd-around g-brd-gray-light-v7 g-rounded-4 g-pa-15 g-pa-30--md" style="border-top: 0 !important;">
+                    <div class="row row">
+
+                      <div class="col-md-6">
+                        <div class="media-body-md align-self-center g-mb-20 g-mb-0--md">
+                            <h3 class="g-line-height-1_5 g-font-weight-400 g-font-size-16 g-color-black g-mb-5">Name:</h3>
+                            <p class="d-block g-font-weight-300 g-color-gray-dark-v6 mb-0">{{currentPackage.name}}</p>
+                        </div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <div class="media-body-md align-self-center g-mb-20 g-mb-0--md">
+                            <h3 class="g-line-height-1_5 g-font-weight-400 g-font-size-16 g-color-black g-mb-5">Limited To Country:</h3>
+                            <p class="d-block g-font-weight-300 g-color-gray-dark-v6 mb-0">{{currentPackage.limitedToCountryId||currentPackage.countryId | CountryCode}}</p>
+                        </div>
+                      </div>
+
+                    </div>
+
+                    <div class="row row g-mt-25">
+
+                        <div class="col-md-6">
+                            <div class="media-body-md align-self-center g-mb-20 g-mb-0--md">
+                                  <h3 class="g-line-height-1_5 g-font-weight-400 g-font-size-16 g-color-black g-mb-5">Status</h3>
+                                  <strong *ngIf="currentPackage.active" class="d-block g-line-height-1 g-font-weight-400 g-font-size-24 g-color-teal-v3 g-mb-5">Active</strong>
+                                  <strong *ngIf="!currentPackage.active" class="d-block g-line-height-1 g-font-weight-400 g-font-size-24 g-color-darkred g-mb-5">Inactive</strong>
+                              </div>
+                            </div>
+
+                            <div class="col-md-6">
+                            <div class="media-body-md align-self-center g-mb-20 g-mb-0--md">
+                                  <h3 class="g-line-height-1_5 g-font-weight-400 g-font-size-16 g-color-black g-mb-5">Created On</h3>
+                                  <strong class="d-block g-line-height-1 g-font-weight-400 g-font-size-16 g-color-darkblue-v9 g-mb-5">{{currentPackage.createdOn | date: 'dd MMMM, yyyy'}}</strong>
+                                  <strong class="d-block g-line-height-1 g-font-size-16 g-mb-5">{{currentPackage.createdOn | date: 'hh:mm:ss a'}}</strong>
+                              </div>
+                            </div>
+
+                    </div>
+
+
+                    <div class="row row g-mt-25">
+
+                        <div class="col-md-6">
+                            <div class="media-body-md align-self-center g-mb-20 g-mb-0--md">
+                                  <h3 class="g-line-height-1_5 g-font-weight-400 g-font-size-16 g-color-black g-mb-5">Expiration In Months:</h3>
+                                  <p class="d-block g-font-weight-300 g-color-gray-dark-v6 mb-0">{{currentPackage.expirationInMonths}}</p>
+                              </div>
+                            </div>
+
+                            <div class="col-md-6">
+                            <div class="media-body-md align-self-center g-mb-20 g-mb-0--md">
+                                  <h3 class="g-line-height-1_5 g-font-weight-400 g-font-size-16 g-color-black g-mb-5">Amount:</h3>
+                                  <p class="d-block g-font-weight-300 g-color-gray-dark-v6 mb-0">{{currentPackage.amount}}</p>
+                              </div>
+                            </div>
+
+                    </div>
+
+
+                    <div class="row row g-mt-25">
+
+                        <div class="col-md-6">
+                            <div class="media-body-md align-self-center g-mb-20 g-mb-0--md">
+                                <h3 class="g-line-height-1_5 g-font-weight-400 g-font-size-16 g-color-black g-mb-5">Point Price:</h3>
+                                <p class="d-block g-font-weight-300 g-color-gray-dark-v6 mb-0">{{currentPackage.pointPrice}}</p>
+                            </div>
+                            </div>
+
+                            <div class="col-md-6">
+                            <div class="media-body-md align-self-center g-mb-20 g-mb-0--md">
+                                <h3 class="g-line-height-1_5 g-font-weight-400 g-font-size-16 g-color-black g-mb-5">Used Count:</h3>
+                                <p class="d-block g-font-weight-300 g-color-gray-dark-v6 mb-0">{{currentPackage.usedCount}}</p>
+                            </div>
+                          </div>
+
+                    </div>
+
+
+                    </div>
+
+            </ng-template>
+        </ngb-tab>
+        <ngb-tab *ngIf="currentPackage.networkPrices.length > 0">
+            <ng-template ngbTabTitle>
+                <span class="g-color-gray-dark-v6 g-color-primary--parent-hover g-color-primary--parent-active"><b>Networks</b></span>
+            </ng-template>
+            <ng-template ngbTabContent>
+                <div class="g-pos-rel h-100 g-brd-around g-brd-gray-light-v7 g-rounded-4 g-pa-15 g-pa-30--md" style="border-top: 0 !important;">
+                    <div *ngFor="let network of currentPackage.networkPrices" class="media-md g-mb-30">
+                        <div class="media-body-md align-self-center g-mb-20 g-mb-0--md">
+                            <h3 class="g-line-height-1_5 g-font-weight-400 g-font-size-16 g-color-black g-mb-5">Network:</h3>
+                            <p class="d-block g-font-weight-300 g-color-gray-dark-v6 mb-0">{{network.networkId | NetworkCode}}</p>
+                        </div>
+                        <div class="media-body-md align-self-center g-mb-20 g-mb-0--md">
+                            <h3 class="g-line-height-1_5 g-font-weight-400 g-font-size-16 g-color-black g-mb-5">Price:</h3>
+                            <p class="d-block g-font-weight-300 g-color-gray-dark-v6 mb-0">{{network.price}}</p>
+                        </div>
+                        <div class="media-body-md align-self-center g-mb-20 g-mb-0--md">
+                            <h3 class="g-line-height-1_5 g-font-weight-400 g-font-size-16 g-color-black g-mb-5">Type:</h3>
+                            <p class="d-block g-font-weight-300 g-color-gray-dark-v6 mb-0">{{network.type | MessageTypeCode | async}}</p>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </ngb-tab>
+    </ngb-tabset>
+</div>

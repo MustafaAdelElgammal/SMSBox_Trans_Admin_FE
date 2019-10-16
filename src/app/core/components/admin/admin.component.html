@@ -1,0 +1,15 @@
+<app-header ></app-header>
+<main class="container-fluid g-pt-65 px-0">
+    <div class="row no-gutters g-pos-rel g-overflow-x-hidden">
+        <div id="sideNav" class="col-auto u-sidebar-navigation-v1 u-sidebar-navigation--dark">
+            <app-sidebar ></app-sidebar>
+        </div>
+        <div class="col g-ml-45 g-ml-0--lg g-pb-65--md" style="min-height: 100vh">
+            <div class="loading-overlay" id="loading-overlay" #spinnerElement>
+                <app-main-loader></app-main-loader>
+            </div>
+            <router-outlet></router-outlet>
+            <app-footer></app-footer>
+        </div>
+    </div>
+</main>

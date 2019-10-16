@@ -1,0 +1,184 @@
+<app-breadcrumb [breadcrumbList]="[{name:'Networks', url:'networks/dashboard'},{name:'List', url:'networks/list'},{name: nameV, url:''}]"></app-breadcrumb>
+<div class="g-pa-20">
+    <ng-template appConfirm><app-confirm-modal [withDetails]="false"></app-confirm-modal></ng-template>
+    <div class="g-brd-around g-brd-gray-light-v7 g-rounded-4 g-pa-15 g-pa-20--md g-mb-30">
+      <form #f="ngForm" (ngSubmit)="submit(f, f.value)">
+        <h3 class="d-flex align-self-center text-uppercase g-font-size-12 g-font-size-default--md g-color-black"><span class="d-flex align-self-center g-pos-rel g-font-size-18 g-mr-10"><i class="hs-admin-panel"></i></span>Update {{nameV}} Network</h3>
+        <hr class="d-flex g-brd-gray-light-v7 g-my-15 g-mt-15--md g-mb-30--md">
+        <div class="row">
+          <div class="col-md-6">
+            <div
+              class="form-group">
+              <label class="g-mb-10" for="name">Name <span style="color: red">*</span></label>
+              <div class="g-pos-rel">
+                <input
+                  id="name"
+                  [(ngModel)]="nameV"
+                  tabindex="1"
+                  name="name"
+                  #name="ngModel"
+                  placeholder="Name"
+                  type="text"
+                  required
+                  autocomplete="off"
+                  [class.u-has-error-v3]="!name.valid && addNetworkError || uniqueError!=null && addNetworkError"
+                  class="form-control form-control-md g-brd-gray-light-v7 g-brd-gray-light-v3--focus g-rounded-4 g-px-14 g-py-10">
+                <small
+                  *ngIf="!name.valid && addNetworkError || uniqueError!=null && addNetworkError"
+                  class="g-font-weight-300 g-font-size-12 g-color-lightred-v3  g-pt-5">
+                  <span *ngIf="name.errors?.required">the name is required</span>
+                  <span *ngIf="uniqueError != null">{{uniqueError}}</span>
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="g-mb-10" for="company">Company <span style="color: red">*</span></label>
+              <div class="g-pos-rel">
+                <input
+                  id="company"
+                  [(ngModel)]="companyV"
+                  tabindex="2"
+                  name="company"
+                  #company="ngModel"
+                  placeholder="Company Name"
+                  required
+                  autocomplete="off"
+                  [class.u-has-error-v3]="!company.valid && addNetworkError"
+                  type="text"
+                  class="form-control form-control-md g-brd-gray-light-v7 g-brd-gray-light-v3--focus g-rounded-4 g-px-14 g-py-10">
+                <small
+                  *ngIf="!company.valid && addNetworkError"
+                  class="g-font-weight-300 g-font-size-12 g-color-lightred-v3  g-pt-5">
+                  <span *ngIf="company.errors.required">the company is required</span>
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="g-mb-20">
+              <label class="g-mb-10">Country <span style="color: red">*</span></label>
+              <ng-select
+                [items]="countries"
+                tabindex="3"
+                [(ngModel)]="selectedCountry"
+                [name]="'countryId'"
+                #countryId
+                placeholder="Select Country"
+                [searchable]="true"
+                [clearable]="true"
+                dropdownPosition="bottom"
+                bindLabel="name"
+                bindValue="_id"
+                required
+                [ngClass]="{'ng-invalid ng-touched ng-custom': selectedCountry === null && addNetworkError}"
+                class="u-select-dropdown--blue-theme u-sibling w-100">
+                <ng-template ng-label-tmp let-item="item">
+                  <span class="d-flex align-items-center w-100"><span> {{item.name}}</span></span>
+                </ng-template>
+                <ng-template ng-option-tmp let-item="item" let-index="index">
+                  <span class="d-flex align-items-center w-100"><span> {{item.name}}</span></span>
+                </ng-template>
+              </ng-select>
+              <small
+                *ngIf="selectedCountry === null && addNetworkError"
+                class="g-font-weight-300 g-font-size-12 g-color-lightred-v3  g-pt-5">
+                <span>the country is required</span>
+              </small>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="g-mb-10" for="fullNumberLength">Full Number Length <span style="color: red">*</span> <small> (Type + Enter)</small></label>
+              <div class="g-pos-rel">
+                <tag-input
+                  id="fullNumberLength"
+                  [(ngModel)]="fullNumberLengthValues"
+                  tabindex="4"
+                  [name]="'fullNumberLength'"
+                  placeholder=""
+                  secondaryPlaceholder="Full Number Length"
+                  [animationDuration]="{enter: '0ms', leave: '0ms'}"
+                  [allowDupes]="false"
+                  [errorMessages]="fullNumberLengthValidationErrorMessages"
+                  [validators]="fullNumberLengthValidators"
+                  [ripple]="false"
+                  [modelAsStrings]="true"
+                  #fullNumberLength="ngModel"
+                  required
+                  [class.u-has-error-v3]="fullNumberLengthValues.length == 0 && addNetworkError"
+                  theme='minimal'>
+                </tag-input>
+                <small
+                  *ngIf="fullNumberLengthValues.length == 0 && addNetworkError"
+                  class="g-font-weight-300 g-font-size-12 g-color-lightred-v3  g-pt-5">
+                  <span>the Full Number Length required one at least</span>
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="g-mb-10" for="carrierCodes">Carrier Codes <small> (Type + Enter)</small></label>
+              <div class="g-pos-rel">
+                <tag-input
+                  id="carrierCodes"
+                  [(ngModel)]="carrierCodesValues"
+                  tabindex="5"
+                  [name]="'carrierCodes'"
+                  placeholder=""
+                  secondaryPlaceholder="Carrier Codes"
+                  [animationDuration]="{enter: '0ms', leave: '0ms'}"
+                  [allowDupes]="false"
+                  [errorMessages]="carrierCodesValidationErrorMessages"
+                  [validators]="carrierCodesValidators"
+                  [ripple]="false"
+                  [modelAsStrings]="true"
+                  #carrierCodes="ngModel"
+                  theme='minimal'>
+                </tag-input>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="g-mb-10" for="prefixes">Prefixes <span style="color: red">*</span> <small> (Type + Enter)</small></label>
+              <div class="g-pos-rel">
+                <tag-input
+                  id="prefixes"
+                  [(ngModel)]="prefixesValues"
+                  tabindex="6"
+                  [name]="'prefixes'"
+                  placeholder=""
+                  secondaryPlaceholder="Prefixes"
+                  [animationDuration]="{enter: '0ms', leave: '0ms'}"
+                  [allowDupes]="false"
+                  [errorMessages]="prefixesValidationErrorMessages"
+                  [validators]="prefixesValidators"
+                  [ripple]="false"
+                  [modelAsStrings]="true"
+                  #prefixes="ngModel"
+                  [class.u-has-error-v3]="addNetworkError && prefixesValues.length == 0"
+                  theme='minimal'>
+                </tag-input>
+                <small
+                  *ngIf="prefixesValues.length == 0 && addNetworkError"
+                  class="g-font-weight-300 g-font-size-12 g-color-lightred-v3  g-pt-5">
+                  <span>the prefixes required one at least</span>
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <button
+            [disabled]="isSubmitClick"
+            class="btn btn-md btn-xl--md u-btn-secondary g-width-160--md g-font-size-12 g-font-size-default--md g-mr-10">
+            <span>Update </span>
+            <img *ngIf="isSubmitClick" src="assets/img/preloaders/preloader-white.svg" style="height: 16px;">
+        </button>
+      </form>
+    </div>
+</div>

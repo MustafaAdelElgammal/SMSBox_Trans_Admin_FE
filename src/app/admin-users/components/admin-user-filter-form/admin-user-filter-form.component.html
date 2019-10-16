@@ -1,0 +1,121 @@
+<div class="g-brd-around g-brd-gray-light-v7 g-rounded-4 g-pa-15 g-pa-20--md g-mb-30">
+
+    <form [formGroup]="filterForm" (ngSubmit)="submitFilterForm()">
+
+        <h3 class="g-mt-5 pull-left d-flex align-self-center text-uppercase g-font-size-12 g-font-size-default--md g-color-black">
+            <span class="d-flex align-self-center g-pos-rel g-font-size-18 g-mr-10"><i class="hs-admin-filter"></i></span>
+            Filter
+        </h3>
+        <button
+            type="button"
+            class="btn btn-md u-btn-secondary pull-right g-width-160--md g-font-size-12 g-font-size-default--md g-mb-10 g-mr-10"
+            routerLink="/admin/admin_users/create">
+            Create New
+        </button>
+        <hr class="d-flex g-brd-gray-light-v7 g-my-15 g-mt-15--md g-mb-30--md" style="clear:both">
+
+        <div class="row">
+
+            <div class="col-md-4">
+                  <div class="form-group">
+                      <label class="g-mb-10" for="name">Name</label>
+                      <div class="g-pos-rel">
+                          <input
+                              id="name"
+                              tabindex="1"
+                              formControlName="name"
+                              placeholder="Name"
+                              type="text"
+                              autocomplete="off"
+                              class="form-control form-control-md g-brd-gray-light-v7 g-brd-gray-light-v3--focus g-rounded-4 g-px-14 g-py-10">
+                      </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="g-mb-10" for="email">Email</label>
+                    <div class="g-pos-rel">
+                        <input
+                            id="email"
+                            tabindex="2"
+                            formControlName="email"
+                            placeholder="Email"
+                            type="text"
+                            autocomplete="off"
+                            class="form-control form-control-md g-brd-gray-light-v7 g-brd-gray-light-v3--focus g-rounded-4 g-px-14 g-py-10">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <app-roles-dropdown
+                      [parentForm]="filterForm"
+                      [inputFormName]="'role'"
+                      [isRequired]="false"
+                      [selectedRole]="''"
+                      [placeHolder]="'Select Role'"
+                      [label]="'Role'"
+                      [hasError]="false"
+                      [tabNumber]="'3'"></app-roles-dropdown>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Created On From: </label>
+                    <div class="u-datepicker-right u-datepicker--v3 g-pos-rel w-100 g-cursor-pointer g-brd-around g-brd-gray-light-v7 g-rounded-4">
+                        <input
+                            flatpickr
+                            id="createdOn_from"
+                            formControlName="createdOn_from"
+                            type="text"
+                            [dateFormat]="'Y-m-d'"
+                            [allowInput]="true"
+                            placeholder="Created On From"
+                            mask="0000-00-00"
+                            [dropSpecialCharacters]="false"
+                            autocomplete="off"
+                            class="js-range-datepicker-from w-100 g-bg-transparent g-font-size-12 g-font-size-default--md g-color-gray-dark-v6 g-pr-80 g-pl-15 g-py-9">
+                          <div class="d-flex align-items-center g-absolute-centered--y g-right-0 g-color-gray-light-v6 g-color-lightblue-v9--sibling-opened g-mr-15">
+                            <i class="hs-admin-calendar g-font-size-18 g-mr-10"></i>
+                            <i class="hs-admin-angle-down"></i>
+                          </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Created On To: </label>
+                    <div class="u-datepicker-right u-datepicker--v3 g-pos-rel w-100 g-cursor-pointer g-brd-around g-brd-gray-light-v7 g-rounded-4">
+                        <input
+                            flatpickr
+                            id="createdOn_to"
+                            formControlName="createdOn_to"
+                            type="text"
+                            [dateFormat]="'Y-m-d'"
+                            [altFormat]="'Y-m-d'"
+                            [allowInput]="true"
+                            placeholder="Created On From"
+                            mask="0000-00-00"
+                            [dropSpecialCharacters]="false"
+                            autocomplete="off"
+                            class="js-range-datepicker-from w-100 g-bg-transparent g-font-size-12 g-font-size-default--md g-color-gray-dark-v6 g-pr-80 g-pl-15 g-py-9">
+                            <div class="d-flex align-items-center g-absolute-centered--y g-right-0 g-color-gray-light-v6 g-color-lightblue-v9--sibling-opened g-mr-15">
+                              <i class="hs-admin-calendar g-font-size-18 g-mr-10"></i>
+                              <i class="hs-admin-angle-down"></i>
+                            </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <app-filter-form-tail (onReset)="resetFilterForm()"></app-filter-form-tail>
+
+    </form>
+
+</div>
+

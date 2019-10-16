@@ -1,0 +1,178 @@
+<app-breadcrumb [breadcrumbList]="[{name:'Users', url:'users/dashboard'},{name: 'Add Package', url:''}]"></app-breadcrumb>
+
+<div class="g-pa-20">
+  <div class="g-brd-around g-brd-gray-light-v7 g-rounded-4 g-pa-15 g-pa-20--md g-mb-30">
+    <h3 class="d-flex align-self-center text-uppercase g-font-size-12 g-font-size-default--md g-color-black g-mb-20">Find User</h3>
+    <hr class="d-flex g-brd-gray-light-v7 g-my-15 g-mt-25--md g-mb-30--md">
+    <form #f="ngForm" (ngSubmit)="findUser(f)" class="g-py-15">
+      <div class="row">
+        <div class="col-md-5">
+            <div
+              [class.u-has-error-v3]="!email.valid && email.touched"
+              class="form-group  g-mb-30">
+              <label class="g-mb-10" for="email">Email</label>
+            <div class="g-pos-rel">
+              <input
+                id="email"
+                ngModel
+                tabindex="1"
+                name="email"
+                #email="ngModel"
+                type="email"
+                autocomplete="off"
+                pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+                class="form-control form-control-md g-brd-gray-light-v7 g-brd-gray-light-v3--focus g-rounded-4 g-px-14 g-py-10">
+              <small
+                *ngIf="!email.valid && email.touched"
+                class="g-font-weight-300 g-font-size-12 g-color-lightred-v3  g-pt-5">
+                <span *ngIf="email.errors.required">the email field is required</span>
+                <span *ngIf="email.errors.pattern">the email field is not a valid email address</span>
+              </small>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-2 text-center"><strong>OR</strong></div>
+        <div class="col-md-5">
+          <div
+            [class.u-has-error-v3]="!phoneNumber.valid && phoneNumber.touched"
+            class="form-group  g-mb-30">
+            <label class="g-mb-10" for="phoneNumber">Phone Number</label>
+            <div class="g-pos-rel">
+              <input
+                id="phoneNumber"
+                ngModel
+                tabindex="2"
+                name="phoneNumber"
+                #phoneNumber="ngModel"
+                type="text"
+                autocomplete="off"
+                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                class="form-control form-control-md g-brd-gray-light-v7 g-brd-gray-light-v3--focus g-rounded-4 g-px-14 g-py-10">
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr class="d-flex g-brd-gray-light-v7  g-my-10--md g-mb-30--md">
+      <button
+        [disabled]="isFindUserClick"
+        class="btn btn-md btn-xl--md u-btn-secondary g-width-160--md g-font-size-12 g-font-size-default--md g-mr-10 g-mb-10">
+        <span>Find User</span>
+        <img *ngIf="isFindUserClick" src="assets/img/preloaders/preloader-white.svg" style="height: 16px;">
+      </button>
+      <button
+          type="button"
+          (click)="onResetClick()"
+          class="btn btn-md btn-xl--md u-btn-outline-gray-dark-v6 g-font-size-12 g-font-size-default--md g-mr-10">
+          RESET
+      </button>
+    </form>
+  </div>
+
+  <div class="g-pos-rel h-100 g-brd-around g-brd-gray-light-v7 g-rounded-4 g-pa-15 g-pa-20--md g-mb-30">
+    <header>
+      <h2 class="text-uppercase g-font-size-12 g-font-size-default--md g-color-black mb-0">User Information</h2>
+    </header>
+    <hr class="d-flex g-brd-gray-light-v7 g-my-15 g-mt-25--md g-mb-30--md">
+    <div class="g-mb-30">
+      <div class="col-md-12 g-mb-20">
+        <h2 class="g-line-height-1_5 g-font-weight-600 g-font-size-16 g-color-black g-mb-5">Email</h2>
+        <p class="d-block g-font-weight-300 g-color-gray-dark-v6 mb-0">{{selectedUser?.email}}</p>
+      </div>
+      <div class="col-md-12 g-mb-20">
+        <h2 class="g-line-height-1_5 g-font-weight-600 g-font-size-16 g-color-black g-mb-5">Phone Number</h2>
+        <p class="d-block g-font-weight-300 g-color-gray-dark-v6 mb-0">{{selectedUser?.phoneNumber}}</p>
+      </div>
+      <div *ngIf="selectedUser?.active === false" class="col-md-12 g-mb-10">
+        <h2 class="g-line-height-1_5 g-font-weight-600 g-font-size-16 g-color-black g-mb-5">Status</h2>
+        <span class="u-tags-v1 text-center g-width-110 g-brd-around g-brd-primary g-bg-primary g-font-weight-400 g-color-white g-rounded-50 g-py-4 g-px-15">Inactive</span>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="showSectionTow" class="g-pos-rel h-100 g-brd-around g-brd-gray-light-v7 g-rounded-4 g-pa-15 g-pa-20--md g-mb-30">
+      <header>
+        <h2 class="text-uppercase g-font-size-12 g-font-size-default--md g-color-black">Add Package To User</h2>
+      </header>
+      <hr class="d-flex g-brd-gray-light-v7 g-my-15 g-mt-20--md g-mb-20--md">
+      <form #fAddPackage="ngForm" (ngSubmit)="addPackageToUser(fAddPackage)" class="g-py-15">
+        <div class="row">
+          <div class="col-md-8">
+            <div class="g-mb-20">
+
+              <label class="g-mb-10">Choose Package <span style="color: red">*</span></label>
+              <ng-select
+                [disabled]="!showSectionTow"
+                [items]="packages"
+                tabindex="1"
+                [(ngModel)]="selectedPackage"
+                [name]="'packageId'"
+                #packageId="ngModel"
+                placeholder="Choose Package"
+                [searchable]="true"
+                [clearable]="true"
+                dropdownPosition="bottom"
+                bindLabel="name"
+                bindValue="_id"
+                required
+                [ngClass]="{'ng-invalid ng-touched ng-custom': showSectionTow && selectedPackage === null && packageId.touched || (showSectionTow && selectedPackage === null  && isAddPackageError)}"
+                class="u-select-dropdown--blue-theme u-sibling w-100">
+                <ng-template ng-label-tmp let-item="item">
+                  <span class="d-flex align-items-center w-100"><span> {{item.name}}</span></span>
+                </ng-template>
+                <ng-template ng-option-tmp let-item="item" let-index="index">
+                  <span class="d-flex align-items-center w-100"><span> {{item.name}}</span></span>
+                </ng-template>
+              </ng-select>
+              <small
+                *ngIf="selectedPackage === null && showSectionTow && packageId.touched  || (showSectionTow && selectedPackage === null  && isAddPackageError)"
+                class="g-font-weight-300 g-font-size-12 g-color-lightred-v3  g-pt-5">
+                <span>the package is required</span>
+              </small>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="g-mb-10" for="available">Available <span style="color: red">*</span></label>
+              <div class="g-pos-rel">
+                <span class="g-pos-abs g-top-0 g-right-0 d-block g-width-40 h-100 opacity-0 g-opacity-1--success">
+                  <i class="hs-admin-check g-absolute-centered g-font-size-default g-color-secondary"></i>
+                </span>
+                <input
+                  id="available"
+                  type="text"
+                  [disabled]="!showSectionTow"
+                  placeholder="Available"
+                  ngModel
+                  tabindex="2"
+                  name="available"
+                  #available="ngModel"
+                  required
+                  autocomplete="off"
+                  [class.u-has-error-v3]="!available.valid && available.touched && showSectionTow || (showSectionTow && !available.valid && isAddPackageError)"
+                  oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(.*)/g, '$1');"
+                  class="form-control form-control-md g-brd-gray-light-v7 g-brd-gray-light-v3--focus g-rounded-4 g-px-14 g-py-10">
+                <small
+                  *ngIf="!available.valid && available.touched && showSectionTow || (showSectionTow && !available.valid && isAddPackageError)"
+                  class="g-font-weight-300 g-font-size-12 g-color-lightred-v3  g-pt-5">
+                  <span *ngIf="available.errors?.required">the available field is required</span>
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <hr class="d-flex g-brd-gray-light-v7  g-my-10--md g-mb-30--md">
+            <button
+              [disabled]="isAddPackageClick || !showSectionTow"
+              class="btn btn-md btn-xl--md u-btn-secondary g-width-160--md g-font-size-12 g-font-size-default--md g-mr-10 g-mb-10">
+              <span>Add Package </span>
+              <img *ngIf="isAddPackageClick" src="assets/img/preloaders/preloader-white.svg" style="height: 16px;">
+            </button>
+            <button [disabled]="isAddPackageClick || !showSectionTow" type="reset" (click)="resetData()" class="btn btn-md btn-xl--md u-btn-outline-gray-dark-v6 g-font-size-12 g-font-size-default--md g-mr-10 g-mb-10">
+              Cancel</button>
+          </div>
+        </div>
+      </form>
+  </div>
+</div>

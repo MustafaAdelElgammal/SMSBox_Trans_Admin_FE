@@ -1,0 +1,49 @@
+<div class="row">
+    <div class="col-md-3" *ngIf="totalCount > 0">
+        <div class="d-flex align-items-center">
+            <span class="g-hidden-sm-down g-color-gray-dark-v6 g-mr-12">Show: </span>
+            <ng-select
+                [items]="pagination"
+                [(ngModel)]="selectedPage"
+                tabindex="3"
+                placeholder="Select Status"
+                [searchable]="false"
+                [clearable]="false"
+                bindLabel="name"
+                bindValue="value"
+                (change)="changeSizeClick($event.value)"
+                class="u-select-dropdown--blue-theme u-sibling">
+                <ng-template ng-label-tmp let-item="item">
+                    <span class="d-flex align-items-center w-100">
+                        <span> {{item.name}} Entries</span>
+                    </span>
+                </ng-template>
+                <ng-template ng-option-tmp let-item="item" let-index="index">
+                    <span class="d-flex align-items-center w-100">
+                        <span> {{item.name}} Entries</span>
+                    </span>
+                </ng-template>
+            </ng-select>
+          </div>
+    </div>
+
+    <div class="col-md-7 text-center">
+        <nav *ngIf="pageNumbers>0" class="d-flex">
+          <ngb-pagination
+            style="margin:0 auto"
+            [collectionSize]="totalCount"
+            [pageSize]="selectedPage"
+            [page]="currentPaginationSelected"
+            [maxSize]="6" [rotate]="true"
+            (pageChange)="pagingClick($event)"
+            [boundaryLinks]="true"></ngb-pagination>
+        </nav>
+    </div>
+
+    <div class="col-md-2 pull-right" >
+        <label class="g-pt-10--md">Total: {{totalCount}}</label>
+    </div>
+
+</div>
+
+

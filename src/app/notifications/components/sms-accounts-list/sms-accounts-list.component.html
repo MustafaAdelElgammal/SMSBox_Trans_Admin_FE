@@ -1,0 +1,42 @@
+<app-breadcrumb [breadcrumbList]="[{name:'Notifications', url:'notifications/dashboard'},{name:'SMS Accounts List', url:''}]"></app-breadcrumb>
+<div class="g-pa-20">
+
+    <app-main-loader [style.display]="displayLoader"></app-main-loader>
+    <button type="button"
+        class="btn btn-md u-btn-secondary pull-right g-width-160--md g-font-size-12 g-font-size-default--md g-mb-10 g-mr-10"
+        routerLink="/admin/notifications/sms-accounts-create">
+        Create New
+    </button>
+    <div class="table-responsive g-mb-20">
+        <div id="scroll-to-here"></div>
+        <table [style.display]="displayTable" class="table u-table--v3--bordered g-color-black">
+
+            <thead>
+                <tr>
+                    <th class="g-bg-gray-light-v8 g-font-weight-400 g-valign-middle g-brd-bottom-none g-py-15">
+                        <div class="align-items-center justify-content-between">Provider</div>
+                    </th>
+                    <th class="g-bg-gray-light-v8 g-font-weight-400 g-valign-middle g-brd-bottom-none g-py-15">
+                        <div class="align-items-center justify-content-between">Name</div>
+                    </th>
+                    <th class="g-bg-gray-light-v8 g-font-weight-400 g-valign-middle g-brd-bottom-none g-py-15">
+                        <div class="align-items-center justify-content-between">Actions</div>
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngIf="notFound"><td colspan="3" class="g-hidden-sm-down g-valign-middle g-brd-top-none g-brd-bottom g-brd-gray-light-v7 g-py-15 g-py-30--md g-px-5 g-px-10--sm">No matching records found</td></tr>
+
+                <tr *ngFor="let smsAcount of smsAcounts">
+
+                  <td class="g-hidden-sm-down g-valign-middle text-center g-brd-top-none g-brd-bottom g-brd-gray-light-v7 g-py-15 g-py-30--md g-px-5 g-px-10--sm">{{smsAcount.provider}}</td>
+                  <td class="g-hidden-sm-down g-valign-middle text-center g-brd-top-none g-brd-bottom g-brd-gray-light-v7 g-py-15 g-py-30--md g-px-5 g-px-10--sm">{{smsAcount.name }}</td>
+                  <td class="g-hidden-sm-down g-valign-middle text-center g-brd-top-none g-brd-bottom g-brd-gray-light-v7 g-py-15 g-py-30--md g-px-5 g-px-10--sm"><a routerLink="/admin/notifications/sms-accounts-update/{{smsAcount._id}}" class="u-pagination-v1__item u-pagination-v1-2 g-bg-secondary--active g-color-white--active g-brd-gray-light-v7 g-brd-secondary--hover g-brd-secondary--active g-rounded-4 g-py-8 g-px-15">Update</a></td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+
+</div>

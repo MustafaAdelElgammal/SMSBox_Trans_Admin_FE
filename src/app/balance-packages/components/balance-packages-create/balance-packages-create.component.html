@@ -1,0 +1,181 @@
+<app-breadcrumb [breadcrumbList]="[{name:'Balance Packages', url:'balance_packages/dashboard'},{name:'Create', url:''}]"></app-breadcrumb>
+<div class="g-pa-20">
+  <div class="g-brd-around g-brd-gray-light-v7 g-rounded-4 g-pa-15 g-pa-20--md g-mb-30">
+    <form [formGroup]="createPackageForm" (ngSubmit)="onSubmit()">
+      <h3 class="d-flex align-self-center text-uppercase g-font-size-12 g-font-size-default--md g-color-black"><span class="d-flex align-self-center g-pos-rel g-font-size-18 g-mr-10"><i class="hs-admin-panel"></i></span>Create New Balance Package</h3>
+      <hr class="d-flex g-brd-gray-light-v7 g-my-15 g-mt-15--md g-mb-30--md">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label class="g-mb-10" for="name">Package Name <span style="color: red">*</span></label>
+            <div class="g-pos-rel">
+              <input
+                id="name"
+                formControlName="name"
+                type="text"
+                tabindex="1"
+                placeholder="Package Name"
+                autocomplete="off"
+                [class.u-has-error-v3]="!createPackageForm.get('name').valid && createPackageForm.get('name').touched || errorMessage != '' && !createPackageForm.get('name').valid || packageNameUniqueError"
+                class="form-control form-control-md g-brd-gray-light-v7 g-brd-gray-light-v3--focus g-rounded-4 g-px-14 g-py-10">
+              <small
+                *ngIf="!createPackageForm.get('name').valid && createPackageForm.get('name').touched || errorMessage != '' && !createPackageForm.get('name').valid || packageNameUniqueError != null" class="g-font-weight-300 g-font-size-12 g-color-lightred-v3  g-pt-5">
+                <span *ngIf="!createPackageForm.get('name').valid && createPackageForm.get('name').errors['required']">Package Name is required</span>
+                <span *ngIf="packageNameUniqueError != null">{{packageNameUniqueError}}</span>
+              </small>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="g-mb-20">
+            <app-countries-dropdown
+                [parentForm]="createPackageForm"
+                [inputFormName]="'limitedToCountryId'"
+                [isRequired]="'true'"
+                [placeHolder]="'Select Country'"
+                [label]="'Country'"
+                [hasError]="!createPackageForm.get('limitedToCountryId').valid && (createPackageForm.get('limitedToCountryId').touched || errorMessage != '')"
+                [tabNumber]="'2'">
+            </app-countries-dropdown>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label class="g-mb-10" for="expirationInMonths">Expiration In Months <span style="color: red">*</span></label>
+            <div class="g-pos-rel">
+              <input
+                id="expirationInMonths"
+                formControlName="expirationInMonths"
+                type="text"
+                tabindex="3"
+                autocomplete="off"
+                placeholder="Expiration In Months"
+                oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(.*)/g, '$1'); (+this.value === 0)? this.value = null: null;(+this.value > 45)? this.value = 45: null"
+                [class.u-has-error-v3]="!createPackageForm.get('expirationInMonths').valid && createPackageForm.get('expirationInMonths').touched || errorMessage != '' && !createPackageForm.get('expirationInMonths').valid"
+                class="form-control form-control-md g-brd-gray-light-v7 g-brd-gray-light-v3--focus g-rounded-4 g-px-14 g-py-10">
+              <small
+                *ngIf="!createPackageForm.get('expirationInMonths').valid && createPackageForm.get('expirationInMonths').touched || errorMessage != '' && !createPackageForm.get('expirationInMonths').valid" class="g-font-weight-300 g-font-size-12 g-color-lightred-v3  g-pt-5">
+                <span *ngIf="createPackageForm.get('expirationInMonths').errors['required']">Expiration In Months is required</span>
+              </small>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label class="g-mb-10" for="amount">Amount <span style="color: red">*</span></label>
+            <div class="g-pos-rel">
+              <input
+                id="amount"
+                formControlName="amount"
+                type="text"
+                tabindex="4"
+                placeholder="Amount"
+                autocomplete="off"
+                oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(.*)/g, '$1');"
+                [class.u-has-error-v3]="!createPackageForm.get('amount').valid && (createPackageForm.get('amount').touched || errorMessage != '')"
+                class="form-control form-control-md g-brd-gray-light-v7 g-brd-gray-light-v3--focus g-rounded-4 g-px-14 g-py-10">
+              <small
+                *ngIf="!createPackageForm.get('amount').valid && createPackageForm.get('amount').touched || errorMessage != '' && !createPackageForm.get('amount').valid" class="g-font-weight-300 g-font-size-12 g-color-lightred-v3  g-pt-5">
+                <span *ngIf="createPackageForm.get('amount').errors['required']">Amount is required</span>
+              </small>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label class="g-mb-10" for="pointPrice">Point Price </label>
+            <div class="g-pos-rel">
+              <input
+                id="pointPrice"
+                formControlName="pointPrice"
+                type="text"
+                tabindex="5"
+                autocomplete="off"
+                placeholder="Point Price"
+                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                class="form-control form-control-md g-brd-gray-light-v7 g-brd-gray-light-v3--focus g-rounded-4 g-px-14 g-py-10">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div formArrayName="networkPrices">
+        <div *ngFor="let network of createPackageForm.get('networkPrices')['controls']; let i=index">
+          <div [formGroupName]="i">
+            <div class="row g-brd-gray-light-v7 g-brd-around g-rounded-4 g-pb-15 g-pt-15 g-mb-5">
+              <div class="col-md-12">
+                <h4 class="d-flex align-self-center g-font-size-12 g-font-size-default--md">Add Network Price</h4>
+                <hr class="d-flex g-brd-gray-light-v7 g-my-15 g-mt-15--md g-mb-30--md">
+              </div>
+              <div class="col-md-4">
+                <div class="g-mb-20">
+                  <app-networks-dropdown
+                    [parentForm]="network"
+                    [isRequired]="'true'"
+                    [label]="'Network'"
+                    [placeHolder]="'Select Network'"
+                    [inputFormName]="'networkId'"
+                    [tabNumber]="'2'"
+                    [hasError]="!network.get('networkId').valid && ( network.get('networkId').touched || errorMessage !='')"
+                  ></app-networks-dropdown>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="g-mb-20">
+                  <app-message-types-dropdown
+                    [parentForm]="network"
+                    [isRequired]="'true'"
+                    [label]="'Message Types'"
+                    [placeHolder]="'Select Message type'"
+                    [inputFormName]="'type'"
+                    [tabNumber]="'52'"
+                    [hasError]="!network.get('type').valid && ( network.get('type').touched || errorMessage !='')"
+                  ></app-message-types-dropdown>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label class="g-mb-10" for="price">Price <span style="color: red">*</span></label>
+                  <div class="g-pos-rel">
+                    <input
+                      id="price"
+                      tabindex="3"
+                      formControlName="price"
+                      placeholder="Price"
+                      type="text"
+                      autocomplete="off"
+                      oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                      [class.u-has-error-v3]="!network.get('price').valid && (network.get('price').touched || errorMessage != '')"
+                      class="form-control form-control-md g-brd-gray-light-v7 g-brd-gray-light-v3--focus g-rounded-4 g-px-14 g-py-10">
+                    <small
+                      *ngIf="!network.get('price').valid && (network.get('price').touched || errorMessage != '')" class="g-font-weight-300 g-font-size-12 g-color-lightred-v3 g-pt-5">
+                      <span>Network Price is required</span>
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-1">
+                <div style=" display: table; height: 100%; ">
+                  <div style=" display: table-cell; vertical-align: middle; "><i  (click)="deleteNetworkGroup(i)" class="fa fa-remove" style="cursor: pointer;padding: 7px;border: 1px solid #ccc !important;"></i></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button
+      class="btn btn-md btn-xl--md u-btn-bluegray g-mr-10 g-width-160--md g-font-size-12 g-font-size-default--md g-mr-10 "
+       type="button"
+       (click)="addNetworkGroup()"
+       style="margin-right:10px">Add Network Price</button>
+
+      <button
+            [disabled]="isSubmitClick"
+            class="btn btn-md btn-xl--md u-btn-secondary g-width-160--md g-font-size-12 g-font-size-default--md g-mr-10">
+            <span>Create </span>
+            <img *ngIf="isSubmitClick" src="assets/img/preloaders/preloader-white.svg" style="height: 16px;">
+          </button>
+
+    </form>
+  </div>
+</div>

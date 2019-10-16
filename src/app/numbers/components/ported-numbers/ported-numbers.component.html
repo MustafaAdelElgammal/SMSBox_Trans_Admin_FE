@@ -1,0 +1,93 @@
+<div class="g-hidden-sm-down g-bg-gray-light-v8 g-pa-20">
+  <ul class="u-list-inline g-color-gray-dark-v6">
+    <li class="list-inline-item g-mr-10">
+      <a class="u-link-v5 g-color-gray-dark-v6 g-color-secondary--hover g-valign-middle" href="javascript:void(0)">Numbers</a>
+      <i class="hs-admin-angle-right g-font-size-12 g-color-gray-light-v6 g-valign-middle g-ml-10"></i>
+    </li>
+    <li class="list-inline-item g-mr-10">
+      <a class="u-link-v5 g-color-gray-dark-v6 g-color-secondary--hover g-valign-middle" href="javascript:void(0)">Search Ported Number</a>
+    </li>
+  </ul>
+</div>
+
+<div class="g-pa-20">
+  <div class="g-brd-around g-brd-gray-light-v7 g-rounded-4 g-pa-15 g-pa-20--md g-mb-30">
+    <form [formGroup]="portedNumberForm" (ngSubmit)="onSubmit()">
+        <h3 class="g-mt-5 pull-left d-flex align-self-center text-uppercase g-font-size-12 g-font-size-default--md g-color-black">
+          <span class="d-flex align-self-center g-pos-rel g-font-size-18 g-mr-10"><i class="hs-admin-filter"></i></span>
+          Search for ported number
+        </h3>
+        <button
+            type="button"
+            class="btn btn-md u-btn-secondary pull-right g-width-160--md g-font-size-12 g-font-size-default--md g-mb-10 g-mr-10"
+            routerLink="/admin/numbers/ported-numbers/create">
+            Create New
+        </button>
+        <hr class="d-flex g-brd-gray-light-v7 g-my-15 g-mt-15--md g-mb-30--md" style="clear:both">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="g-mb-10" for="number">Number <span style="color: red">*</span></label>
+            <div class="g-pos-rel">
+                <input
+                  id="number"
+                  formControlName="number"
+                  type="text"
+                  tabindex="1"
+                  placeholder="Number"
+                  autocomplete="off"
+                  oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(.*)/g, '$1');" [class.u-has-error-v3]="!portedNumberForm.get('number').valid  && (portedNumberForm.get('number').touched || errorMessage != '')"
+                  class="form-control form-control-md g-brd-gray-light-v7 g-brd-gray-light-v3--focus g-rounded-4 g-px-14 g-py-10">
+                <small *ngIf="!portedNumberForm.get('number').valid && ( portedNumberForm.get('number').touched || errorMessage != '')"
+                  class="g-font-weight-300 g-font-size-12 g-color-lightred-v3  g-pt-5">
+                  <span *ngIf="portedNumberForm.get('number').errors['required']">Number is required</span>
+                </small>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <button [disabled]="submitted" class="btn btn-md btn-xl--md u-btn-secondary g-width-160--md g-font-size-12 g-font-size-default--md g-mr-10">
+            <span>Search </span>
+            <img *ngIf="submitted" src="assets/img/preloaders/preloader-white.svg" style="height: 16px;">
+
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="g-pos-rel h-100 g-brd-around g-brd-gray-light-v7 g-rounded-4 g-pa-15 g-pa-20--md g-mb-30">
+    <header>
+      <h2 class="text-uppercase g-font-size-12 g-font-size-default--md g-color-black mb-0">Ported Number Information</h2>
+    </header>
+    <hr class="d-flex g-brd-gray-light-v7 g-my-15 g-mt-25--md g-mb-30--md">
+    <div class="media-md g-mb-30">
+      <div class="media-body-md align-self-center g-mb-20 g-mb-0--md">
+        <h3 class="g-line-height-1_5 g-font-weight-400 g-font-size-16 g-color-black g-mb-5">Number</h3>
+        <p class="d-block g-font-weight-300 g-color-gray-dark-v6 mb-0">{{data?.number}}</p>
+      </div>
+      <div class="media-body-md align-self-center g-mb-20 g-mb-0--md">
+        <h3 class="g-line-height-1_5 g-font-weight-400 g-font-size-16 g-color-black g-mb-5">Original Network</h3>
+        <p class="d-block g-font-weight-300 g-color-gray-dark-v6 mb-0">{{data?.originalNetworkId}}</p>
+      </div>
+    </div>
+    <div class="media-md g-mb-30">
+      <div class="media-body-md align-self-center g-mb-20 g-mb-0--md">
+        <h3 class="g-line-height-1_5 g-font-weight-400 g-font-size-16 g-color-black g-mb-5">Last Updated On</h3>
+        <p class="d-block g-font-weight-300 g-color-gray-dark-v6 mb-0">{{data?.lastUpdatedOn| date}}</p>
+      </div>
+      <div class="media-body-md align-self-center g-mb-20 g-mb-0--md">
+        <h3 class="g-line-height-1_5 g-font-weight-400 g-font-size-16 g-color-black g-mb-5">Ported To Network</h3>
+        <p class="d-block g-font-weight-300 g-color-gray-dark-v6 mb-0">{{data?.portedToNetworkId}}</p>
+      </div>
+    </div>
+    <div class="media-md g-mb-30">
+      <div class="media-body-md align-self-center g-mb-20 g-mb-0--md">
+        <h3 class="g-line-height-1_5 g-font-weight-400 g-font-size-16 g-color-black g-mb-5">Details</h3>
+        <p class="d-block g-font-weight-300 g-color-gray-dark-v6 mb-0">{{data?.details}}</p>
+      </div>
+    </div>
+  </div>
+</div>

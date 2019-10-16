@@ -1,0 +1,37 @@
+<app-breadcrumb [breadcrumbList]="[{name:'Log List', url:'logs'},{name:'Log Details', url:''}]"></app-breadcrumb>
+<div class="g-pa-20" *ngIf="currentLog">
+  <div class="col-md-12">
+    <div class="g-pos-rel h-100 g-brd-around g-brd-gray-light-v7 g-rounded-4 g-pa-15 g-pa-30--md">
+      <header>
+        <h2 class="text-uppercase g-font-size-12 g-font-size-default--md g-color-black mb-0">Log Details</h2>
+      </header>
+      <hr class="d-flex g-brd-gray-light-v7 g-my-15 g-mt-25--md g-mb-30--md">
+      <div class="media-md g-mb-30">
+        <div class="media-body-md align-self-center g-mb-20 g-mb-0--md">
+          <h3 class="g-line-height-1_5 g-font-weight-400 g-font-size-16 g-color-black g-mb-5">App Name:</h3>
+          <p class="d-block g-font-weight-300 g-color-gray-dark-v6 mb-0">{{currentLog.app_name}}</p>
+        </div>
+        <div class="d-md-flex flex-column ml-auto">
+          <em class="d-block g-font-style-normal g-font-weight-300 g-color-gray-dark-v6">Log Level</em>
+          <strong *ngIf="currentLog?.logLevel === 10" class="d-block g-line-height-1 g-font-weight-400 g-font-size-24 g-color-teal-v3 g-mb-5">{{LOGLEVEL[currentLog.logLevel] | uppercase}}</strong>
+          <strong *ngIf="currentLog?.logLevel === 20" class="d-block g-line-height-1 g-font-weight-400 g-font-size-24 g-color-orange g-mb-5">{{LOGLEVEL[currentLog.logLevel] | uppercase}}</strong>
+          <strong *ngIf="currentLog?.logLevel === 30" class="d-block g-line-height-1 g-font-weight-400 g-font-size-24 g-color-primary g-mb-5">{{LOGLEVEL[currentLog.logLevel] | uppercase}}</strong>
+          <strong *ngIf="currentLog?.logLevel === 40" class="d-block g-line-height-1 g-font-weight-400 g-font-size-24 g-color-darkred g-mb-5">{{LOGLEVEL[currentLog.logLevel] | uppercase}}</strong>
+        </div>
+        <div class="d-md-flex flex-column g-brd-top g-brd-top-none--md g-brd-left--md g-brd-gray-light-v7 g-pt-20 g-pt-0--md g-pl-35--md g-mt-20 g-mt-0--md g-ml-35--md g-mr-15--md">
+          <em class="d-block g-font-style-normal g-font-weight-300 g-color-gray-dark-v6">Created On</em>
+          <strong class="d-block g-line-height-1 g-font-weight-400 g-font-size-24 g-color-darkblue-v9 g-mb-5">{{currentLog.createdOn | date: 'dd MMMM, yyyy'}}</strong>
+          <strong class="d-block g-line-height-1 g-font-size-16 g-mb-5">{{currentLog.createdOn | date: 'hh:mm:ss a'}}</strong>
+        </div>
+      </div>
+      <div class="media-body-md align-self-center g-mb-20 g-mb-30--md">
+        <h3 class="g-line-height-1_5 g-font-weight-400 g-font-size-16 g-color-black g-mb-5">Message:</h3>
+        <p class="d-block g-font-weight-300 g-color-gray-dark-v6 mb-0">{{currentLog.message}}</p>
+      </div>
+      <div class="media-body-md align-self-center g-mb-20 g-mb-0--md">
+        <h3 class="g-line-height-1_5 g-font-weight-400 g-font-size-16 g-color-black g-mb-5">Details:</h3>
+        <p class="d-block g-font-weight-300 g-color-gray-dark-v6 mb-0">{{currentLog.details}}</p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,72 @@
+<app-breadcrumb [breadcrumbList]="[{name:'Admin Users', url:'admin_users/dashboard'},{name:'List', url:''}]"></app-breadcrumb>
+<div class="g-pa-20">
+    <app-admin-user-filter-form [query]="query" (onFilter)="submitFilter()"></app-admin-user-filter-form>
+    <app-main-loader [style.display]="displayLoader"></app-main-loader>
+
+    <div class="table-responsive g-mb-20">
+        <div id="scroll-to-here"></div>
+        <table [style.display]="displayTable" class="table u-table--v3--bordered g-color-black">
+            <thead>
+                <tr>
+                    <th class="g-bg-gray-light-v8 g-font-weight-400 g-valign-middle g-brd-bottom-none g-py-15">
+                        <div class="d-flex align-items-center justify-content-between">Email</div>
+                    </th>
+                    <th class="g-bg-gray-light-v8 g-font-weight-400 g-valign-middle g-brd-bottom-none g-py-15">
+                        <div class="d-flex align-items-center justify-content-between">Name</div>
+                    </th>
+                    <th class="g-bg-gray-light-v8 g-font-weight-400 g-valign-middle g-brd-bottom-none g-py-15">
+                        <div class="d-flex align-items-center justify-content-between">Active</div>
+                    </th>
+                    <th class="g-bg-gray-light-v8 g-font-weight-400 g-valign-middle g-brd-bottom-none g-py-15">
+                        <div class="d-flex align-items-center justify-content-between">Roles</div>
+                    </th>
+                    <th class="g-bg-gray-light-v8 g-font-weight-400 g-valign-middle g-brd-bottom-none g-py-15">
+                        <div class="d-flex align-items-center justify-content-between">Created On</div>
+                    </th>
+                    <th class="g-bg-gray-light-v8 g-font-weight-400 g-valign-middle g-brd-bottom-none g-py-15">
+                        <div class="d-flex align-items-center justify-content-between">Actions</div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngIf="notFound"><td colspan="6" class="g-hidden-sm-down g-valign-middle g-brd-top-none g-brd-bottom g-brd-gray-light-v7 g-py-15 g-py-30--md g-px-5 g-px-10--sm">No matching records found</td></tr>
+                <tr *ngFor="let adminUser of userAdmins">
+                  <td class="g-hidden-sm-down g-valign-middle g-brd-top-none g-brd-bottom g-brd-gray-light-v7 g-py-15 g-py-30--md g-px-5 g-px-10--sm">{{adminUser.email}}</td>
+                  <td class="g-hidden-sm-down g-valign-middle g-brd-top-none g-brd-bottom g-brd-gray-light-v7 g-py-15 g-py-30--md g-px-5 g-px-10--sm">{{adminUser.name }}</td>
+                  <td class="g-hidden-sm-down g-valign-middle g-brd-top-none g-brd-bottom g-brd-gray-light-v7 g-py-15 g-py-30--md g-px-5 g-px-10--sm">
+                    <span *ngIf="!adminUser.active" class="d-flex align-items-center justify-content-center u-tags-v1  g-font-size-default g-color-gray-dark-v6 g-brd-white g-py-4 g-px-15">
+                        <span class="u-badge-v2--md g-pos-stc g-transform-origin--top-left g-brd-teal-v2  g-mr-8"></span>
+                        Inactive
+                    </span>
+                    <span *ngIf="adminUser.active" class="d-flex align-items-center justify-content-center u-tags-v1  g-font-size-default g-color-gray-dark-v6 g-brd-white g-py-4 g-px-15">
+                        <span class="u-badge-v2--md g-pos-stc g-transform-origin--top-left g-bg-teal-v2 g-mr-8"></span>
+                        Active
+                    </span>
+                  </td>
+                  <td class="g-hidden-sm-down g-valign-middle g-brd-top-none g-brd-bottom g-brd-gray-light-v7 g-py-15 g-py-30--md g-px-5 g-px-10--sm">
+                      <span *ngFor="let role of adminUser.roles ; last as isLast">
+                          <span *ngIf="!isLast">{{role | ReplaceUnderscoreWithSpace}}, </span>
+                          <span *ngIf="isLast">{{role | ReplaceUnderscoreWithSpace}}</span>
+                      </span>
+                  </td>
+                  <td class="g-hidden-sm-down g-valign-middle g-brd-top-none g-brd-bottom g-brd-gray-light-v7 g-py-15 g-py-30--md g-px-5 g-px-10--sm">{{adminUser.createdOn | date: 'dd MMMM, yyyy - hh:mm:ss a'}}</td>
+                  <td class="g-hidden-sm-down g-valign-middle g-brd-top-none g-brd-bottom g-brd-gray-light-v7 g-py-15 g-py-30--md g-px-5 g-px-10--sm"><a routerLink="/admin/admin_users/details/{{adminUser._id}}" class="u-pagination-v1__item u-pagination-v1-2 g-bg-secondary--active g-color-white--active g-brd-gray-light-v7 g-brd-secondary--hover g-brd-secondary--active g-rounded-4 g-py-8 g-px-15">Update</a></td>
+                </tr>
+                <tr *ngIf="pageNumbers>0">
+                  <td colspan="6" class="g-hidden-sm-down g-valign-middle g-brd-top-none g-brd-bottom g-brd-gray-light-v7 g-py-15 g-py-30--md g-px-5 g-px-10--sm">
+                    <app-page-size
+                      (changeSize)="onSizeChange($event)"
+                      (changePage)="onPageChange($event)"
+                      [totalCount]="totalCount"
+                      [pagination]="pagination"
+                      [pageNumbers]="pageNumbers"
+                      [currentPaginationSelected]="currentPageSelected"
+                      [selectedPage]="selectedPage">
+                    </app-page-size>
+                  </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
